@@ -1,0 +1,17 @@
+@use 'styles/variables.module' as v;
+@use 'styles/mixins.module' as m;
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.cards__item {
+  width: 32%;
+  min-width: 155px;
+  min-height: 209px;
+  margin-bottom: 2rem;
+  @include m.media-max767 {
+    width: 48%;
+  }
+}

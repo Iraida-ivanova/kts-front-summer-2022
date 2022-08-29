@@ -1,0 +1,29 @@
+@use 'styles/variables.module' as v;
+@use 'styles/mixins.module' as m;
+
+.button {
+    font-size: 1.8rem;
+    color: v.$white-color;
+    @include m.aline-center();
+    cursor: pointer;
+    &_disabled {
+       @include m.disabled();
+    }
+    &:hover {
+        opacity: .8;
+    }
+}
+.button_color-primary {
+    background-color: v.$primary-color;
+    .loader_inButton {
+        @include m.loader-color(v.$white-color, v.$primary-color);
+        margin-left: 5px;
+    }
+}
+.button_color-secondary {
+    background-color: v.$secondary-color;
+    .loader_inButton {
+        @include m.loader-color(v.$white-color, v.$secondary-color);
+        margin-left: 5px;
+    }
+}

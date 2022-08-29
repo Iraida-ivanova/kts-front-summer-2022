@@ -1,0 +1,76 @@
+@use 'styles/variables.module' as v;
+@use 'styles/mixins.module' as m;
+
+.card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px 8px 0 #0000001F;
+    background-color: v.$white-color;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 2px 3px 8px 2px darken(#0000001F, 0.7);
+    }
+}
+.card__likes {
+    @include m.likes();
+}
+.card__image {
+    margin: 4px 13px;
+}
+.card__title {
+    color: v.$dark-text-color;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -3%;
+    flex-grow: 1;
+}
+.card__category {
+    color: v.$primary-color;
+    opacity: .8;
+    font-size: 1.4rem;
+    line-height: 200%;
+}
+.card__subtitle {
+    color: v.$grey-text-color;
+    opacity: .5;
+    font-size: 1.5rem;
+    letter-spacing: -3%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.card__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card__contentLeft {
+    color: v.$primary-color;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+.card__button_form_round {
+    display: none;
+    @include m.square(3rem);
+    border-radius: 50%;
+    font-size: 2.5rem;
+    @include m.media-max1100 {
+        display: block;
+    }
+}
+.card__button_form_rectangle {
+    width: 108px;
+    height: 41px;
+    border-radius: v.$base-border-radius;
+    padding: 8px;
+    @include m.media-max1100 {
+        display: none;
+    }
+}
