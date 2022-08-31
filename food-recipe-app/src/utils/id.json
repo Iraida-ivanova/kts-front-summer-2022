@@ -1,0 +1,447 @@
+{
+  "vegetarian": true,
+  "vegan": true,
+  "glutenFree": false,
+  "dairyFree": true,
+  "veryHealthy": true,
+  "cheap": false,
+  "veryPopular": false,
+  "sustainable": false,
+  "lowFodmap": false,
+  "weightWatcherSmartPoints": 14,
+  "gaps": "no",
+  "preparationMinutes": -1,
+  "cookingMinutes": -1,
+  "aggregateLikes": 41,
+  "healthScore": 72,
+  "creditsText": "Foodista.com – The Cooking Encyclopedia Everyone Can Edit",
+  "license": "CC BY 3.0",
+  "sourceName": "Foodista",
+  "pricePerServing": 274.9,
+  "extendedIngredients": [
+    {
+      "id": 16058,
+      "aisle": "Canned and Jarred",
+      "image": "chickpeas.png",
+      "consistency": "SOLID",
+      "name": "canned garbanzo beans",
+      "nameClean": "canned chickpeas",
+      "original": "1 ounce can Garbanzo beans, drained",
+      "originalName": "Garbanzo beans, drained",
+      "amount": 1.0,
+      "unit": "ounce",
+      "meta": [
+        "drained",
+        "canned"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1.0,
+          "unitShort": "oz",
+          "unitLong": "ounce"
+        },
+        "metric": {
+          "amount": 28.35,
+          "unitShort": "g",
+          "unitLong": "grams"
+        }
+      }
+    },
+    {
+      "id": 9085,
+      "aisle": "Produce",
+      "image": "currants.jpg",
+      "consistency": "SOLID",
+      "name": "dried currants",
+      "nameClean": "dried currants",
+      "original": "2 tablespoons dried currants",
+      "originalName": "dried currants",
+      "amount": 2.0,
+      "unit": "tablespoons",
+      "meta": [
+        "dried"
+      ],
+      "measures": {
+        "us": {
+          "amount": 2.0,
+          "unitShort": "Tbsps",
+          "unitLong": "Tbsps"
+        },
+        "metric": {
+          "amount": 2.0,
+          "unitShort": "Tbsps",
+          "unitLong": "Tbsps"
+        }
+      }
+    },
+    {
+      "id": 11291,
+      "aisle": "Produce",
+      "image": "spring-onions.jpg",
+      "consistency": "SOLID",
+      "name": "green onions",
+      "nameClean": "spring onions",
+      "original": "2 green onions, chopped",
+      "originalName": "green onions, chopped",
+      "amount": 2.0,
+      "unit": "",
+      "meta": [
+        "chopped"
+      ],
+      "measures": {
+        "us": {
+          "amount": 2.0,
+          "unitShort": "",
+          "unitLong": ""
+        },
+        "metric": {
+          "amount": 2.0,
+          "unitShort": "",
+          "unitLong": ""
+        }
+      }
+    },
+    {
+      "id": 1002014,
+      "aisle": "Spices and Seasonings",
+      "image": "ground-cumin.jpg",
+      "consistency": "SOLID",
+      "name": "ground cumin",
+      "nameClean": "cumin",
+      "original": "1/2 teaspoon ground cumin",
+      "originalName": "ground cumin",
+      "amount": 0.5,
+      "unit": "teaspoon",
+      "meta": [],
+      "measures": {
+        "us": {
+          "amount": 0.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        },
+        "metric": {
+          "amount": 0.5,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        }
+      }
+    },
+    {
+      "id": 10020028,
+      "aisle": "Pasta and Rice;Ethnic Foods",
+      "image": "couscous-israeli.jpg",
+      "consistency": "SOLID",
+      "name": "israeli couscous",
+      "nameClean": "dry israeli couscous",
+      "original": "1 cup whole wheat Israeli couscous",
+      "originalName": "whole wheat Israeli couscous",
+      "amount": 1.0,
+      "unit": "cup",
+      "meta": [
+        "whole wheat"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1.0,
+          "unitShort": "cup",
+          "unitLong": "cup"
+        },
+        "metric": {
+          "amount": 236.588,
+          "unitShort": "ml",
+          "unitLong": "milliliters"
+        }
+      }
+    },
+    {
+      "id": 9206,
+      "aisle": "Beverages",
+      "image": "orange-juice.jpg",
+      "consistency": "LIQUID",
+      "name": "juice of orange",
+      "nameClean": "orange juice",
+      "original": "1 orange, juice and zest",
+      "originalName": "orange, juice and zest",
+      "amount": 1.0,
+      "unit": "",
+      "meta": [],
+      "measures": {
+        "us": {
+          "amount": 1.0,
+          "unitShort": "",
+          "unitLong": ""
+        },
+        "metric": {
+          "amount": 1.0,
+          "unitShort": "",
+          "unitLong": ""
+        }
+      }
+    },
+    {
+      "id": 4053,
+      "aisle": "Oil, Vinegar, Salad Dressing",
+      "image": "olive-oil.jpg",
+      "consistency": "LIQUID",
+      "name": "olive oil",
+      "nameClean": "olive oil",
+      "original": "1 tablespoon olive oil",
+      "originalName": "olive oil",
+      "amount": 1.0,
+      "unit": "tablespoon",
+      "meta": [],
+      "measures": {
+        "us": {
+          "amount": 1.0,
+          "unitShort": "Tbsp",
+          "unitLong": "Tbsp"
+        },
+        "metric": {
+          "amount": 1.0,
+          "unitShort": "Tbsp",
+          "unitLong": "Tbsp"
+        }
+      }
+    },
+    {
+      "id": 11297,
+      "aisle": "Produce;Spices and Seasonings",
+      "image": "parsley.jpg",
+      "consistency": "SOLID",
+      "name": "parsley",
+      "nameClean": "parsley",
+      "original": "parsley",
+      "originalName": "parsley",
+      "amount": 2.0,
+      "unit": "servings",
+      "meta": [],
+      "measures": {
+        "us": {
+          "amount": 2.0,
+          "unitShort": "servings",
+          "unitLong": "servings"
+        },
+        "metric": {
+          "amount": 2.0,
+          "unitShort": "servings",
+          "unitLong": "servings"
+        }
+      }
+    },
+    {
+      "id": 12142,
+      "aisle": "Nuts;Baking",
+      "image": "pecans.jpg",
+      "consistency": "SOLID",
+      "name": "pecans",
+      "nameClean": "pecans",
+      "original": "1/4 cup chopped pecans, toasted",
+      "originalName": "chopped pecans, toasted",
+      "amount": 0.25,
+      "unit": "cup",
+      "meta": [
+        "toasted",
+        "chopped"
+      ],
+      "measures": {
+        "us": {
+          "amount": 0.25,
+          "unitShort": "cups",
+          "unitLong": "cups"
+        },
+        "metric": {
+          "amount": 59.147,
+          "unitShort": "ml",
+          "unitLong": "milliliters"
+        }
+      }
+    },
+    {
+      "id": 11821,
+      "aisle": "Produce",
+      "image": "red-pepper.jpg",
+      "consistency": "SOLID",
+      "name": "red bell pepper",
+      "nameClean": "red pepper",
+      "original": "1 piece small red bell pepper",
+      "originalName": "red bell pepper",
+      "amount": 1.0,
+      "unit": "piece",
+      "meta": [
+        "red"
+      ],
+      "measures": {
+        "us": {
+          "amount": 1.0,
+          "unitShort": "",
+          "unitLong": ""
+        },
+        "metric": {
+          "amount": 1.0,
+          "unitShort": "",
+          "unitLong": ""
+        }
+      }
+    },
+    {
+      "id": 1022053,
+      "aisle": "Ethnic Foods;Oil, Vinegar, Salad Dressing",
+      "image": "rice-vinegar.png",
+      "consistency": "LIQUID",
+      "name": "rice vinegar",
+      "nameClean": "rice vinegar",
+      "original": "1 teaspoon rice vinegar",
+      "originalName": "rice vinegar",
+      "amount": 1.0,
+      "unit": "teaspoon",
+      "meta": [],
+      "measures": {
+        "us": {
+          "amount": 1.0,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        },
+        "metric": {
+          "amount": 1.0,
+          "unitShort": "tsp",
+          "unitLong": "teaspoon"
+        }
+      }
+    },
+    {
+      "id": 1102047,
+      "aisle": "Spices and Seasonings",
+      "image": "salt-and-pepper.jpg",
+      "consistency": "SOLID",
+      "name": "salt and pepper",
+      "nameClean": "salt and pepper",
+      "original": "Salt and pepper, to taste",
+      "originalName": "Salt and pepper, to taste",
+      "amount": 2.0,
+      "unit": "servings",
+      "meta": [
+        "to taste"
+      ],
+      "measures": {
+        "us": {
+          "amount": 2.0,
+          "unitShort": "servings",
+          "unitLong": "servings"
+        },
+        "metric": {
+          "amount": 2.0,
+          "unitShort": "servings",
+          "unitLong": "servings"
+        }
+      }
+    },
+    {
+      "id": 1012028,
+      "aisle": "Spices and Seasonings",
+      "image": "paprika.jpg",
+      "consistency": "SOLID",
+      "name": "smoked paprika",
+      "nameClean": "smoked paprika",
+      "original": "1/8 teaspoon smoked paprika",
+      "originalName": "smoked paprika",
+      "amount": 0.125,
+      "unit": "teaspoon",
+      "meta": [
+        "smoked"
+      ],
+      "measures": {
+        "us": {
+          "amount": 0.125,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        },
+        "metric": {
+          "amount": 0.125,
+          "unitShort": "tsps",
+          "unitLong": "teaspoons"
+        }
+      }
+    }
+  ],
+  "id": 639535,
+  "title": "Citrusy Pecan Garbanzo Couscous: A Salad For Cold Weather",
+  "readyInMinutes": 45,
+  "servings": 2,
+  "sourceUrl": "http://www.foodista.com/recipe/W3MZ2T66/citrusy-pecan-garbanzo-couscous-a-salad-for-cold-weather",
+  "image": "https://spoonacular.com/recipeImages/639535-556x370.jpg",
+  "imageType": "jpg",
+  "summary": "Need a <b>vegan main course</b>? Citrusy Pecan Garbanzo Couscous: A Salad For Cold Weather could be an excellent recipe to try. This recipe serves 2 and costs $2.75 per serving. One serving contains <b>564 calories</b>, <b>15g of protein</b>, and <b>17g of fat</b>. A couple people made this recipe, and 41 would say it hit the spot. Head to the store and pick up rice vinegar, ground cumin, olive oil, and a few other things to make it today. To use up the pecans you could follow this main course with the <a href=\"https://spoonacular.com/recipes/bourbon-cake-with-pecans-a-southern-classic-828483\">Bourbon Cake with Pecans: A Southern Classic</a> as a dessert. From preparation to the plate, this recipe takes around <b>45 minutes</b>. All things considered, we decided this recipe <b>deserves a spoonacular score of 97%</b>. This score is tremendous. Try <a href=\"https://spoonacular.com/recipes/winter-fruit-salad-cool-food-for-cold-weather-580660\">Winter Fruit Salad: Cool Food for Cold Weather</a>, <a href=\"https://spoonacular.com/recipes/citrusy-couscous-salad-with-olives-698723\">Citrusy Couscous Salad with Olives</a>, and <a href=\"https://spoonacular.com/recipes/cold-weather-venison-chili-506759\">Cold-Weather Venison Chili</a> for similar recipes.",
+  "cuisines": [],
+  "dishTypes": [
+    "salad"
+  ],
+  "diets": [
+    "dairy free",
+    "lacto ovo vegetarian",
+    "vegan"
+  ],
+  "occasions": [],
+  "winePairing": {},
+  "instructions": "<ol><li>Prepare couscous according to package instructions. Meanwhile combine all remaining ingredients in a medium mixing bowl. Drain couscous and add to bowl while still hot. Thoroughly mix all ingredients. Taste and adjust seasonings. Serve warm.</li></ol>",
+  "analyzedInstructions": [
+    {
+      "name": "",
+      "steps": [
+        {
+          "number": 1,
+          "step": "Prepare couscous according to package instructions. Meanwhile combine all remaining ingredients in a medium mixing bowl.",
+          "ingredients": [
+            {
+              "id": 20028,
+              "name": "couscous",
+              "localizedName": "couscous",
+              "image": "couscous-cooked.jpg"
+            }
+          ],
+          "equipment": [
+            {
+              "id": 405907,
+              "name": "mixing bowl",
+              "localizedName": "mixing bowl",
+              "image": "mixing-bowl.jpg"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "step": "Drain couscous and add to bowl while still hot. Thoroughly mix all ingredients. Taste and adjust seasonings.",
+          "ingredients": [
+            {
+              "id": 1042027,
+              "name": "seasoning",
+              "localizedName": "seasoning",
+              "image": "seasoning.png"
+            },
+            {
+              "id": 20028,
+              "name": "couscous",
+              "localizedName": "couscous",
+              "image": "couscous-cooked.jpg"
+            }
+          ],
+          "equipment": [
+            {
+              "id": 404783,
+              "name": "bowl",
+              "localizedName": "bowl",
+              "image": "bowl.jpg"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "step": "Serve warm.",
+          "ingredients": [],
+          "equipment": []
+        }
+      ]
+    }
+  ],
+  "originalId": null,
+  "spoonacularSourceUrl": "https://spoonacular.com/citrusy-pecan-garbanzo-couscous-a-salad-for-cold-weather-639535"
+}

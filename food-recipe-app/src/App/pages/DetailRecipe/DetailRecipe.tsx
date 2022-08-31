@@ -1,50 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import Button from '@components/Button';
 import Likes from '@components/Likes';
 import ReturnIcon from '@components/ReturnIcon';
 import WithLoader from '@components/WithLoader';
-import { LoaderSize } from '@projectTypes/enums';
-import { RecipeItem } from '@projectTypes/types';
-import { apiKey } from '@utils/apiKey';
-import axios from 'axios';
+import { LoaderSize, Meta } from '@projectTypes/enums';
+import DetailRecipeStore from '@store/DetailRecipeStore';
+import { IIngredientApi } from '@store/models/Food/Ingridient';
+import { useLocalStore } from '@utils/UseLocalStore';
+import { observer } from 'mobx-react-lite';
 import { Link, useParams } from 'react-router-dom';
 
 import styles from './DetailRecipe.module.scss';
 
 const DetailRecipe: React.FC = () => {
   const { id } = useParams();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [recipe, setRecipe] = useState<null | RecipeItem>(null);
+  const detailRecipeStore = useLocalStore<DetailRecipeStore>(() => new DetailRecipeStore(id));
   useEffect(() => {
-    async function getRecipe(): Promise<void> {
-      setIsLoading(true);
-      const result = await axios({
-        method: 'get',
-        url: `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`,
-      });
-
-      if (result.status !== 200) {
-        throw new Error(result.statusText);
-      }
-      setIsLoading(false);
-      setRecipe({
-        id: result.data.id,
-        image: result.data.image,
-        title: result.data.title,
-        likes: result.data.aggregateLikes,
-        readyInMinutes: result.data.readyInMinutes,
-        ingredients: result.data.extendedIngredients.map(
-          (item: Record<string, string | number | Array<string> | Record<string, Record<string, string | number>>>) =>
-            item.name
-        ),
-        summary: result.data.summary,
-        instructions: result.data.instructions,
-        dishTypes: result.data.dishTypes,
-      });
-    }
-    getRecipe();
-  }, [id]);
+    detailRecipeStore.getDetailRecipe();
+  }, [detailRecipeStore.id]);
   return (
     <div className={styles.detailRecipe}>
       <Link to="/">
@@ -52,33 +26,39 @@ const DetailRecipe: React.FC = () => {
           <ReturnIcon />
         </Button>
       </Link>
-      <WithLoader loading={isLoading} size={LoaderSize.l}>
-        {recipe && (
+      <WithLoader loading={detailRecipeStore.meta === Meta.loading} size={LoaderSize.l}>
+        {detailRecipeStore.meta === Meta.success && detailRecipeStore.item && (
           <>
-            <img className={styles.detailRecipe__image} src={recipe.image} alt={`${recipe.title}`} />
+            <img
+              className={styles.detailRecipe__image}
+              src={detailRecipeStore.item.image}
+              alt={`${detailRecipeStore.item.title}`}
+            />
             <div className={styles.detailRecipe__wrapper}>
               <div className={styles.detailRecipe__scroll}></div>
               <div className={styles.detailRecipe__content}>
-                <h1 className={styles.detailRecipe__title}>{recipe.title}</h1>
-                <Likes likes={recipe.likes} className={styles.detailRecipe__likes} />
-                <div className={styles.detailRecipe__category}>{recipe.dishTypes.join(', ')}</div>
-                <div className={styles.detailRecipe__time}>Сooking time: {recipe.readyInMinutes} minutes</div>
+                <h1 className={styles.detailRecipe__title}>{detailRecipeStore.item.title}</h1>
+                <Likes likes={detailRecipeStore.item.likes} className={styles.detailRecipe__likes} />
+                <div className={styles.detailRecipe__category}>{detailRecipeStore.item.dishTypes.join(', ')}</div>
+                <div className={styles.detailRecipe__time}>
+                  Сooking time: {detailRecipeStore.item.readyInMinutes} minutes
+                </div>
                 <div
                   className={styles.detailRecipe__summary}
-                  dangerouslySetInnerHTML={{ __html: recipe.summary }}
+                  dangerouslySetInnerHTML={{ __html: detailRecipeStore.item.summary }}
                 ></div>
                 <div className={styles.detailRecipe__ingredients}>
                   <h3>Ingredients:</h3>
                   <ul>
-                    {recipe.ingredients.map((product: string) => (
-                      <li key={`${product}${recipe.title}`}>{product}</li>
+                    {detailRecipeStore.item.ingredients.map((product: IIngredientApi) => (
+                      <li key={product.id + product.name}>{product.name}</li>
                     ))}
                   </ul>
                 </div>
-                {recipe.instructions && (
+                {detailRecipeStore.item.instructions && (
                   <div className={styles.detailRecipe__instructions}>
                     <h3>Instructions</h3>
-                    <div dangerouslySetInnerHTML={{ __html: recipe.instructions }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: detailRecipeStore.item.instructions }}></div>
                   </div>
                 )}
               </div>
@@ -89,4 +69,4 @@ const DetailRecipe: React.FC = () => {
     </div>
   );
 };
-export default DetailRecipe;
+export default observer(DetailRecipe);
