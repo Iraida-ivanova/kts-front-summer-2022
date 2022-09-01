@@ -1,17 +1,15 @@
 import { HTTPMethod, Meta } from '@projectTypes/enums';
-import ApiStore from '@store/ApiStore';
 import {
   DetailRecipeItemModel,
   IDetailRecipeItemApi,
   normalizeDetailRecipeItem,
 } from '@store/models/Food/DetailRecipeItem';
-import { apiKey } from '@utils/apiKey';
+import rootStore from '@store/RootStore';
 import { ILocalStore } from '@utils/UseLocalStore';
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 
 import { IDetailRecipeStore } from './types';
 
-const apiStore = new ApiStore('https://api.spoonacular.com', apiKey);
 type PrivateFields = '_item' | '_meta';
 
 export default class DetailRecipeStore implements IDetailRecipeStore, ILocalStore {
@@ -42,7 +40,7 @@ export default class DetailRecipeStore implements IDetailRecipeStore, ILocalStor
     this._meta = Meta.loading;
     this._item = null;
     try {
-      const result = await apiStore.request<IDetailRecipeItemApi>({
+      const result = await rootStore.apiStore.request<IDetailRecipeItemApi>({
         method: HTTPMethod.GET,
         data: {},
         endpoint: `/recipes/${this._id}/information`,

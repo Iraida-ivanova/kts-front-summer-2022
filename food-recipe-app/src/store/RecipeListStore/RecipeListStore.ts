@@ -1,16 +1,14 @@
 import { HTTPMethod, Meta } from '@projectTypes/enums';
-import ApiStore from '@store/ApiStore';
 import { RecipeItemModel } from '@store/models/Food/RecipeItem';
 import { normalizeRecipesData, RecipesDataApi } from '@store/models/Food/RecipesData';
+import rootStore from '@store/RootStore';
 import SelectedValuesStore from '@store/SelectedValuesStore';
-import { apiKey } from '@utils/apiKey';
 import { ILocalStore } from '@utils/UseLocalStore';
 import { getTypes } from '@utils/utils';
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 
 import { IRecipeListStore } from './types';
 
-const apiStore = new ApiStore('https://api.spoonacular.com', apiKey);
 type PrivateFields = '_list' | '_meta' | '_offset' | '_values' | '_hasMore';
 
 export default class RecipeListStore implements IRecipeListStore, ILocalStore {
@@ -58,7 +56,7 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
   getRecipeList = async (): Promise<void> => {
     this._meta = Meta.loading;
     try {
-      const result = await apiStore.request<RecipesDataApi>({
+      const result = await rootStore.apiStore.request<RecipesDataApi>({
         method: HTTPMethod.GET,
         headers: {},
         data: {},
