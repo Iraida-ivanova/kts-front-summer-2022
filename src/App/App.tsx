@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 
 import DetailRecipe from '@pages/DetailRecipe/DetailRecipe';
 import Recipes from '@pages/Recipes';
 import { Option, RecipeCard } from '@projectTypes/types';
 import { apiKey } from '@utils/apiKey';
-import { getRecipeCards, getStringOfTypes } from '@utils/utils';
+import { getRecipeCards } from '@utils/utils';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -32,9 +32,7 @@ const App: React.FC = () => {
   const [hasMore, setHasMore] = React.useState(true);
   const [items, setItems] = React.useState<RecipeCard[]>([]);
   const [pickedValues, setPickedValues] = React.useState<Option[]>([]);
-  useEffect(() => {
-    pickedValues.length ? getRecipes(0, getStringOfTypes(pickedValues)) : getRecipes(0);
-  }, [pickedValues]);
+
   async function getRecipes(offset: number, type?: string) {
     setIsLoading(true);
     const result = await axios({
@@ -58,6 +56,7 @@ const App: React.FC = () => {
       setItems(getRecipeCards(result.data.results));
     }
   }
+
   return (
     <BrowserRouter>
       <Provider value={{ items, isLoading, getRecipes, hasMore, pickedValues, setPickedValues }}>
