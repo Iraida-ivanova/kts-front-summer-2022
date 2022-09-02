@@ -8,14 +8,16 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './Cards.module.scss';
+
 const Cards: React.FC = () => {
   let navigate = useNavigate();
-  const { items, getRecipes, hasMore, pickedValues } = useRecipesContext();
+  const { items, getRecipes, hasMore, pickedValues, error } = useRecipesContext();
 
   async function getNextRecipes() {
     const offset = items.length;
     await getRecipes(offset, getStringOfTypes(pickedValues));
   }
+
   return (
     <div>
       <InfiniteScroll
@@ -31,11 +33,15 @@ const Cards: React.FC = () => {
           </p>
         }
       >
-        {items.map((item) => (
-          <div key={item.id} className={styles.cards__item}>
-            <Card item={item} onClick={() => navigate(`${item.id}`)} />
-          </div>
-        ))}
+        {error ? (
+          <div>{error}</div>
+        ) : (
+          items.map((item) => (
+            <div key={item.id} className={styles.cards__item}>
+              <Card item={item} onClick={() => navigate(`${item.id}`)} />
+            </div>
+          ))
+        )}
       </InfiniteScroll>
     </div>
   );

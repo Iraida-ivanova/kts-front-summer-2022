@@ -1,20 +1,24 @@
-@use './variables.module' as v;
+@use 'variables' as v;
 
 @mixin square($size) {
   width: $size;
   height: $size;
 }
+
 @mixin aline-center() {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 @mixin disabled() {
   opacity: .4;
 }
+
 @mixin gradient($opacity: 1) {
-  background: linear-gradient(90deg, rgba(255,240,240,$opacity) 0%, rgba(255,223,223,$opacity) 100%);
+  background: linear-gradient(90deg, rgba(255, 240, 240, $opacity) 0%, rgba(255, 223, 223, $opacity) 100%);
 }
+
 @mixin text-area($height: 36px) {
   height: $height;
   line-height: 28px;
@@ -22,7 +26,8 @@
     height: 36px;
     font-size: 12px;
     line-height: 28px;
-  };
+  }
+;
   @if $height <= 36px {
     font-size: 12px;
     line-height: 28px;
@@ -31,15 +36,18 @@
     line-height: 52px;
   }
 }
-@mixin loader-size ($size, $border) {
+
+@mixin loader-size($size, $border) {
   @include square($size);
   border-width: $border;
 }
-@mixin loader-color ($color, $left-color) {
+
+@mixin loader-color($color, $left-color) {
   border-color: $color;
   border-left-color: $left-color;
 }
-@mixin likes ($font:12px, $gap: 4px, $color: v.$dark-text-color, $opacity: 1) {
+
+@mixin likes($font:12px, $gap: 4px, $color: v.$dark-text-color, $opacity: 1) {
   font-size: $font;
   gap: $gap;
   color: $color;
@@ -47,12 +55,21 @@
     opacity: $opacity;
   }
 }
+
 @mixin media-max1100 {
-  @media (max-width: v.$large-width) {@content;}
+  @media (max-width: v.$large-width) {
+    @content;
+  }
 }
+
 @mixin media-max767 {
-  @media (max-width: v.$medium-width) {@content;}
+  @media (max-width: v.$medium-width) {
+    @content;
+  }
 }
+
 @mixin media-max500 {
-  @media (max-width: v.$small-width) {@content;}
+  @media (max-width: v.$small-width) {
+    @content;
+  }
 }

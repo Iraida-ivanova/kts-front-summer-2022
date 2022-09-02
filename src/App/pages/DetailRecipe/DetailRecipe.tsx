@@ -16,6 +16,7 @@ const DetailRecipe: React.FC = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = React.useState(false);
   const [recipe, setRecipe] = useState<null | RecipeItem>(null);
+
   useEffect(() => {
     async function getRecipe(): Promise<void> {
       setIsLoading(true);
@@ -43,8 +44,10 @@ const DetailRecipe: React.FC = () => {
         dishTypes: result.data.dishTypes,
       });
     }
+
     getRecipe();
   }, [id]);
+
   return (
     <div className={styles.detailRecipe}>
       <Link to="/">

@@ -18,7 +18,7 @@ const Loader: React.FC<LoaderProps> = ({ loading = true, size = LoaderSize.m, cl
     [`${styles[`loader_size-${size}`]}`]: size,
   });
 
-  return loading ? <div className={loaderClass}></div> : <></>;
+  return loading ? <div className={loaderClass}></div> : null;
 };
 
 export default Loader;

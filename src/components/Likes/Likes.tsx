@@ -12,6 +12,7 @@ type LikesProps = {
 
 const Likes: React.FC<LikesProps> = ({ likes, className }) => {
   const likesClassname = classNames(styles.likes, { [`${className}`]: className });
+
   return (
     <div className={likesClassname}>
       <LikeIcon />

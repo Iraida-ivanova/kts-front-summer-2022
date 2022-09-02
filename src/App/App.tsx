@@ -6,8 +6,9 @@ import { Option, RecipeCard } from '@projectTypes/types';
 import { apiKey } from '@utils/apiKey';
 import { getRecipeCards } from '@utils/utils';
 import axios from 'axios';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+const numberOfElements = 6;
 type RecipesContextType = {
   items: RecipeCard[];
   isLoading: boolean;
@@ -15,6 +16,7 @@ type RecipesContextType = {
   hasMore: boolean;
   pickedValues: Option[];
   setPickedValues: (val: Option[]) => void;
+  error: string | null;
 };
 const RecipesContext = createContext<RecipesContextType>({
   items: [],
@@ -23,26 +25,30 @@ const RecipesContext = createContext<RecipesContextType>({
   hasMore: true,
   pickedValues: [],
   setPickedValues: (val: Option[]) => {},
+  error: null,
 });
 export const useRecipesContext = () => useContext(RecipesContext);
 const Provider = RecipesContext.Provider;
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState<null | string>(null);
   const [hasMore, setHasMore] = React.useState(true);
   const [items, setItems] = React.useState<RecipeCard[]>([]);
   const [pickedValues, setPickedValues] = React.useState<Option[]>([]);
 
   async function getRecipes(offset: number, type?: string) {
+    // eslint-disable-next-line no-console
+    console.log('request');
     setIsLoading(true);
     const result = await axios({
       method: 'get',
-      url: type
-        ? `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${type}&addRecipeNutrition=true&number=6&offset=${offset}`
-        : `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeNutrition=true&number=6&offset=${offset}`,
+      url: `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}${
+        type ? `&type=${type}` : ''
+      }&addRecipeNutrition=true&number=${numberOfElements}&offset=${offset}`,
     });
     if (result.status !== 200) {
-      throw new Error(result.statusText);
+      setError('HAVING PROBLEMS LOADING');
     }
     setIsLoading(false);
     const totalResult = result.data.totalResults;
@@ -59,7 +65,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <Provider value={{ items, isLoading, getRecipes, hasMore, pickedValues, setPickedValues }}>
+      <Provider value={{ items, isLoading, getRecipes, hasMore, pickedValues, setPickedValues, error }}>
         <Routes>
           <Route path="/" element={<Recipes />} />
           <Route path={':id'} element={<DetailRecipe />} />

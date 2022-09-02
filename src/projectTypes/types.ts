@@ -1,9 +1,8 @@
 export type Option = {
-  /** Ключ варианта, используется для отправки на бек/использования в коде */
   key: string;
-  /** Значение варианта, отображается пользователю */
   value: string;
 };
+
 export type RecipeItemApi = {
   id: number;
   image: string;
@@ -37,6 +36,7 @@ export type RecipeItemApi = {
   umber: number;
   totalResults: number;
 };
+
 export type RecipeCard = {
   id: number;
   image: string;
@@ -47,6 +47,7 @@ export type RecipeCard = {
   types: string;
   readyInMinutes: number;
 };
+
 export type RecipeItem = {
   id: number;
   image: string;

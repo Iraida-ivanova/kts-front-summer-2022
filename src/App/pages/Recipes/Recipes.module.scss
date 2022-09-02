@@ -1,5 +1,5 @@
-@use 'styles/variables.module' as v;
-@use 'styles/mixins.module' as m;
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
 
 .recipes {
   max-width: 1100px;
@@ -12,15 +12,18 @@
     max-width: 500px;
   }
 }
+
 .recipes__header {
   width: 100%;
   padding: 0 8px;
   margin: 0 0 2.5rem;
   display: flex;
   gap: v.$margin;
+
   input {
     flex-grow: 1;
   }
+
   @include m.media-max767 {
     flex-direction: column;
     align-items: end;
@@ -29,6 +32,7 @@
     }
   }
 }
+
 .multiDropdownWrapper {
   width: 176px;
   @include m.text-area(60px);

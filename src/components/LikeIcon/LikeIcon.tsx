@@ -1,10 +1,6 @@
 import React from 'react';
 
-export type LikeIconProps = React.PropsWithChildren<{
-  size?: number;
-}>;
-
-const LikeIcon: React.FC<LikeIconProps> = () => {
+const LikeIcon: React.FC = () => {
   return (
     <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -19,4 +15,4 @@ const LikeIcon: React.FC<LikeIconProps> = () => {
   );
 };
 
-export default LikeIcon;
+export default React.memo(LikeIcon);

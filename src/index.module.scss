@@ -1,4 +1,4 @@
-@use 'styles/base.module';
+@use 'styles/base';
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Montserrat:wght@400;500&display=swap');
 
 body {
@@ -10,5 +10,5 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }

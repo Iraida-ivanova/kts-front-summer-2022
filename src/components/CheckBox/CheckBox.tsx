@@ -14,6 +14,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({ onChange, ...props }) => {
     [`${styles.checkbox_disabled}`]: props.disabled,
     [`${styles[`${props.className}`]}`]: props.className,
   });
+
   return (
     <>
       <input

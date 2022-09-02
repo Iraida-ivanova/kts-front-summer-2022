@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import OptionComponent from '@components/OptionComponent';
 import { Option } from '@projectTypes/types';
@@ -20,18 +20,23 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ options, disabled, plural
     [`${styles.multiDropdown__select_little}`]: value.length > 1,
     [`${styles.multiDropdown__select_many}`]: value.length > 4,
   });
-  const onSelectValue = (event: React.MouseEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLDivElement;
-    const ind = value.findIndex((item) => item.key === target.id);
 
-    if (ind === -1) {
-      onChange([...value, { key: target.id, value: target.innerHTML }]);
-    } else {
-      const newValue = [...value];
-      newValue.splice(ind, 1);
-      onChange(newValue);
-    }
-  };
+  const onSelectValue = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      const target = event.target as HTMLDivElement;
+      const ind = value.findIndex((item) => item.key === target.id);
+
+      if (ind === -1) {
+        onChange([...value, { key: target.id, value: target.innerHTML }]);
+      } else {
+        const newValue = [...value];
+        newValue.splice(ind, 1);
+        onChange(newValue);
+      }
+    },
+    [value, onChange]
+  );
+
   return (
     <div className={styles.multiDropdown}>
       <div className={selectClassName} onClick={() => setIsOpened((prevState) => !prevState)}>
@@ -56,4 +61,4 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ options, disabled, plural
   );
 };
 
-export default MultiDropdown;
+export default React.memo(MultiDropdown);

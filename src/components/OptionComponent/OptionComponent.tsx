@@ -15,6 +15,7 @@ const OptionComponent: React.FC<OptionProps> = ({ option, selected, onClick }) =
   const optionClassName = classNames(`${styles.multiDropdown__option}`, {
     [`${styles.multiDropdown__option_selected}`]: selected,
   });
+
   return (
     <div className={optionClassName} id={option.key} onClick={onClick}>
       {option.value}
@@ -22,4 +23,4 @@ const OptionComponent: React.FC<OptionProps> = ({ option, selected, onClick }) =
   );
 };
 
-export default OptionComponent;
+export default React.memo(OptionComponent);

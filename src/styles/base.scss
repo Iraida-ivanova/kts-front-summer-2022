@@ -1,11 +1,12 @@
-@use './variables.module' as v;
-@use './mixins.module' as m;
+@use 'variables' as v;
+@use 'mixins' as m;
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 html {
   font-size: 10px;
   background-color: v.$background-color;
@@ -13,9 +14,11 @@ html {
     font-size: 8px;
   }
 }
+
 input, button {
   border: none;
 }
+
 ul, ol {
   padding-left: 20px;
 }

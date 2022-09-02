@@ -1,20 +1,24 @@
-@use 'styles/variables.module' as v;
-@use 'styles/mixins.module' as m;
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
 
 .input {
-    @include m.text-area(60px);
-    @include m.gradient();
-    border-radius: v.$base-border-radius;
-    padding: 8px 20px;
-    outline-style: none;
-    &_disabled {
-        @include m.disabled();
-    }
-    &::placeholder {
-        color: v.$black-color;
-    }
-    @include m.media-max767 {
-        padding: 4px 8px;
-    };
+  @include m.text-area(60px);
+  @include m.gradient();
+  border-radius: v.$base-border-radius;
+  padding: 8px 20px;
+  outline-style: none;
+
+  &_disabled {
+    @include m.disabled();
+  }
+
+  &::placeholder {
+    color: v.$black-color;
+  }
+
+  @include m.media-max767 {
+    padding: 4px 8px;
+  }
+;
 }
 

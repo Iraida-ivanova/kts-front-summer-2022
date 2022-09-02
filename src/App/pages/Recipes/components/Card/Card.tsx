@@ -23,10 +23,10 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
       <div className={styles.card__subtitle}>{item.subtitle}</div>
       <div className={styles.card__content}>
         <div className={styles.card__contentLeft}>{item.content}</div>
-        <Button color={ButtonColor.primary} className={styles.card__button_form_rectangle}>
+        <Button color={ButtonColor.primary} className={styles.card__button_rectangle}>
           Order
         </Button>
-        <Button color={ButtonColor.primary} className={styles.card__button_form_round}>
+        <Button color={ButtonColor.primary} className={styles.card__button_round}>
           +
         </Button>
       </div>
@@ -34,4 +34,4 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
   );
 };
 
-export default Card;
+export default React.memo(Card);

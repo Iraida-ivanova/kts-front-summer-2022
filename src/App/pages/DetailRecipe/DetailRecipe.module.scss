@@ -1,5 +1,5 @@
-@use 'styles/variables.module' as v;
-@use 'styles/mixins.module' as m;
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
 
 .detailRecipe {
   max-width: 556px;
@@ -10,72 +10,81 @@
   @include m.media-max767 {
     max-width: 376px;
   }
-}
 
-.detailRecipe__image {
-  max-width: 100%;
-  align-self: center;
-}
-
-.detailRecipe__scroll {
-  height: 5px;
-  width: 58px;
-  border-radius: 12px;
-  margin: 0 auto 25px;
-  background-color: v.$pink-color;
-}
-
-.detailRecipe__wrapper {
-  background-color: v.$white-color;
-  position: relative;
-  z-index: 200;
-  top: -10px;
-  border-radius: v.$base-border-radius;
-  padding-top: 18px;
-}
-
-.detailRecipe__content {
-  padding: 0 15px 15px 37px;
-}
-
-.detailRecipe__title {
-  font-size: 27px;
-  font-weight: 500;
-  line-height: 35px;
-  color: v.$dark-blue-text-color;
-  margin-bottom: 20px;
-}
-
-.detailRecipe__likes {
-  @include m.likes(14px, 15px, v.$grey-text-color, 0.3)
-}
-
-.detailRecipe__category, .detailRecipe__time {
-  margin-top: v.$margin;
-  font-size: 1.4rem;
-}
-
-.detailRecipe__time {
-  font-weight: bold;
-}
-
-.detailRecipe__summary, .detailRecipe__ingredients, .detailRecipe__instructions {
-  margin-top: v.$margin-large;
-
-  h3 {
-    margin-bottom: 12px;
+  &__image {
+    max-width: 100%;
+    align-self: center;
   }
-}
 
-.detailRecipe__btnReturn {
-  height: 45px;
-  width: 45px;
-  position: absolute;
-  left: 18px;
-  top: 38px;
-  border-radius: v.$base-border-radius;
-  background-color: #FF000030;
-  z-index: 3;
-  font-size: 30px;
-  color: v.$primary-color;
+  &__scroll {
+    height: 5px;
+    width: 58px;
+    border-radius: 12px;
+    margin: 0 auto 25px;
+    background-color: v.$pink-color;
+  }
+
+  &__wrapper {
+    background-color: v.$white-color;
+    position: relative;
+    z-index: 200;
+    top: -10px;
+    border-radius: v.$base-border-radius;
+    padding-top: 18px;
+  }
+
+  &__wrapper {
+    background-color: v.$white-color;
+    position: relative;
+    z-index: 200;
+    top: -10px;
+    border-radius: v.$base-border-radius;
+    padding-top: 18px;
+  }
+
+  &__content {
+    padding: 0 15px 15px 37px;
+  }
+
+  &__title {
+    font-size: 27px;
+    font-weight: 500;
+    line-height: 35px;
+    color: v.$dark-blue-text-color;
+    margin-bottom: 20px;
+  }
+
+  &__likes {
+    @include m.likes(14px, 15px, v.$grey-text-color, 0.3)
+  }
+
+  &__category, &__time {
+    margin-top: v.$margin;
+    font-size: 1.4rem;
+  }
+
+  &__time {
+    font-weight: bold;
+  }
+
+  &__summary, &__ingredients, &__instructions {
+    margin-top: v.$margin-large;
+
+    h3 {
+      margin-bottom: 12px;
+    }
+  }
+
+  &__btnReturn {
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    left: 18px;
+    top: 38px;
+    border-radius: v.$base-border-radius;
+    background-color: #FF000030;
+    z-index: 3;
+    font-size: 30px;
+    color: v.$primary-color;
+  }
 }
