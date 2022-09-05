@@ -1,0 +1,9 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+.likes {
+  display: flex;
+  align-items: center;
+  line-height: 133%;
+}
+

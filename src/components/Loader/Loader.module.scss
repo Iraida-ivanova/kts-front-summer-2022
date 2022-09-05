@@ -1,0 +1,43 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  top: 0;
+  z-index: 100;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  @include m.loader-color(v.$primary-color, v.$white-color);
+  border-style: solid;
+  border-radius: 50%;
+  animation: loader 1.3s linear infinite;
+  //top: 10%;
+  //left: 50%;
+  //z-index: 10;
+}
+
+.loader_size-l {
+  @include m.loader-size(60px, 6px);
+}
+
+.loader_size-m {
+  @include m.loader-size(40px, 4.5px);
+}
+
+.loader_size-s {
+  @include m.loader-size(20px, 3px);
+}
+
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}

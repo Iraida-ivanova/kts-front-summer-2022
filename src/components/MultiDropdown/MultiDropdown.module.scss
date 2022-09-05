@@ -1,0 +1,50 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+%multi-dropdown-cell {
+  @include m.text-area;
+  padding: v.$drop-padding;
+  font-size: 1.2rem;
+}
+
+.multiDropdown {
+  width: 176px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  user-select: none;
+}
+
+.multiDropdown__select {
+  padding: v.$drop-padding;
+  @include m.text-area(60px);
+  @include m.gradient();
+  border-radius: v.$base-border-radius;
+  margin-bottom: 4px;
+  width: 176px;
+}
+
+.multiDropdown__select_little {
+  font-size: 1.4rem;
+  line-height: 150%;
+  word-wrap: break-word;
+}
+
+.multiDropdown__select_many {
+  font-size: 1.2rem;
+  line-height: 115%;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-wrap: break-word;
+  @include m.media-max767 {
+    -webkit-line-clamp: 3;
+  }
+}
+
+.multiDropdown__options {
+  background-color: v.$white-color;
+  border-radius: v.$base-border-radius;
+}
+

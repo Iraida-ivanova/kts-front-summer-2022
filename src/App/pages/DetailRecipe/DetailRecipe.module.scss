@@ -1,0 +1,90 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+.detailRecipe {
+  max-width: 556px;
+  margin: 0 auto;
+  position: relative;
+  font-size: 1.5rem;
+  line-height: 180%;
+  @include m.media-max767 {
+    max-width: 376px;
+  }
+
+  &__image {
+    max-width: 100%;
+    align-self: center;
+  }
+
+  &__scroll {
+    height: 5px;
+    width: 58px;
+    border-radius: 12px;
+    margin: 0 auto 25px;
+    background-color: v.$pink-color;
+  }
+
+  &__wrapper {
+    background-color: v.$white-color;
+    position: relative;
+    z-index: 200;
+    top: -10px;
+    border-radius: v.$base-border-radius;
+    padding-top: 18px;
+  }
+
+  &__wrapper {
+    background-color: v.$white-color;
+    position: relative;
+    z-index: 200;
+    top: -10px;
+    border-radius: v.$base-border-radius;
+    padding-top: 18px;
+  }
+
+  &__content {
+    padding: 0 15px 15px 37px;
+  }
+
+  &__title {
+    font-size: 27px;
+    font-weight: 500;
+    line-height: 35px;
+    color: v.$dark-blue-text-color;
+    margin-bottom: 20px;
+  }
+
+  &__likes {
+    @include m.likes(14px, 15px, v.$grey-text-color, 0.3)
+  }
+
+  &__category, &__time {
+    margin-top: v.$margin;
+    font-size: 1.4rem;
+  }
+
+  &__time {
+    font-weight: bold;
+  }
+
+  &__summary, &__ingredients, &__instructions {
+    margin-top: v.$margin-large;
+
+    h3 {
+      margin-bottom: 12px;
+    }
+  }
+
+  &__btnReturn {
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    left: 18px;
+    top: 38px;
+    border-radius: v.$base-border-radius;
+    background-color: #FF000030;
+    z-index: 3;
+    font-size: 30px;
+    color: v.$primary-color;
+  }
+}

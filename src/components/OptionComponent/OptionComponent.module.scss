@@ -1,0 +1,25 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+.multiDropdown__option:first-child {
+  border-radius: v.$base-border-radius v.$base-border-radius 0 0;
+}
+
+.multiDropdown__option:last-child {
+  border-radius: 0 0 v.$base-border-radius v.$base-border-radius;
+}
+
+.multiDropdown__option {
+  padding: v.$drop-padding;
+  @include m.text-area();
+  @include m.gradient(.4);
+  color: black;
+
+  &:hover {
+    @include m.gradient(.6);
+  }
+
+  &_selected {
+    @include m.gradient();
+  }
+}
