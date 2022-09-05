@@ -1,29 +1,28 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useRecipesContext } from '@App/App';
 import Loader from '@components/Loader';
-import Card from '@pages/Recipes/components/Card';
-import { getStringOfTypes } from '@utils/utils';
+import RecipeCard from '@pages/Recipes/components/RecipeCard';
+import { observer } from 'mobx-react-lite';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './Cards.module.scss';
 
 const Cards: React.FC = () => {
+  const recipeListStore = useRecipesContext();
   let navigate = useNavigate();
-  const { items, getRecipes, hasMore, pickedValues, error } = useRecipesContext();
 
-  async function getNextRecipes() {
-    const offset = items.length;
-    await getRecipes(offset, getStringOfTypes(pickedValues));
-  }
+  const getNextRecipes = useCallback(async () => {
+    await recipeListStore.getRecipeList();
+  }, [recipeListStore.getRecipeList]);
 
   return (
     <div>
       <InfiniteScroll
-        dataLength={items.length}
+        dataLength={recipeListStore.list.length}
         next={getNextRecipes}
-        hasMore={hasMore}
+        hasMore={recipeListStore.hasMore}
         loader={<Loader />}
         className={styles.cards}
         style={{ overflow: 'hidden' }}
@@ -33,18 +32,14 @@ const Cards: React.FC = () => {
           </p>
         }
       >
-        {error ? (
-          <div>{error}</div>
-        ) : (
-          items.map((item) => (
-            <div key={item.id} className={styles.cards__item}>
-              <Card item={item} onClick={() => navigate(`${item.id}`)} />
-            </div>
-          ))
-        )}
+        {recipeListStore.list.map((item) => (
+          <div key={item.id} className={styles.cards__item}>
+            <RecipeCard item={item} onClick={() => navigate(`${item.id}`)} />
+          </div>
+        ))}
       </InfiniteScroll>
     </div>
   );
 };
 
-export default Cards;
+export default observer(Cards);
