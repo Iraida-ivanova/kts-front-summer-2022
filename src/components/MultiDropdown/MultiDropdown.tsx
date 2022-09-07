@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react';
 
+import { useRecipesContext } from '@App/App';
 import OptionComponent from '@components/OptionComponent';
 import { Option } from '@projectTypes/types';
 import classNames from 'classnames';
+import { observer } from 'mobx-react-lite';
 
 import styles from './MultiDropdown.module.scss';
 
@@ -15,7 +17,10 @@ export type MultiDropdownProps = {
 };
 
 const MultiDropdown: React.FC<MultiDropdownProps> = ({ options, disabled, pluralizeOptions, value, onChange }) => {
-  const [isOpened, setIsOpened] = React.useState(false);
+  const recipeListStore = useRecipesContext();
+  const multiDropdownClassName = classNames(`${styles.multiDropdown}`, {
+    [`${styles.multiDropdown_disabled}`]: disabled,
+  });
   const selectClassName = classNames(`${styles.multiDropdown__select}`, {
     [`${styles.multiDropdown__select_little}`]: value.length > 1,
     [`${styles.multiDropdown__select_many}`]: value.length > 4,
@@ -23,28 +28,34 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ options, disabled, plural
 
   const onSelectValue = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      const target = event.target as HTMLDivElement;
-      const ind = value.findIndex((item) => item.key === target.id);
+      if (!disabled) {
+        const target = event.target as HTMLDivElement;
+        const ind = value.findIndex((item) => item.key === target.id);
 
-      if (ind === -1) {
-        onChange([...value, { key: target.id, value: target.innerHTML }]);
-      } else {
-        const newValue = [...value];
-        newValue.splice(ind, 1);
-        onChange(newValue);
+        if (ind === -1) {
+          onChange([...value, { key: target.id, value: target.innerHTML }]);
+        } else {
+          const newValue = [...value];
+          newValue.splice(ind, 1);
+          onChange(newValue);
+        }
       }
     },
-    [value, onChange]
+    [value, onChange, disabled]
   );
 
   return (
-    <div className={styles.multiDropdown}>
-      <div className={selectClassName} onClick={() => setIsOpened((prevState) => !prevState)}>
+    <div className={multiDropdownClassName}>
+      <div
+        className={selectClassName}
+        onClick={() => {
+          if (!disabled) recipeListStore.multiDropdown.changeIsOpened();
+        }}
+      >
         {pluralizeOptions(value)}
       </div>
       <div className={styles.multiDropdown__options}>
-        {isOpened &&
-          !disabled &&
+        {recipeListStore.multiDropdown.isOpened &&
           options.map((item) => {
             return (
               <React.Fragment key={item.key}>
@@ -61,4 +72,4 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ options, disabled, plural
   );
 };
 
-export default React.memo(MultiDropdown);
+export default React.memo(observer(MultiDropdown));

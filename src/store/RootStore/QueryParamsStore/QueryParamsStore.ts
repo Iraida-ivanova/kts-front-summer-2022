@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 import * as qs from 'qs';
 
 type PrivateFields = '_params';
@@ -10,9 +10,11 @@ export default class QueryParamsStore {
   constructor() {
     makeObservable<QueryParamsStore, PrivateFields>(this, {
       _params: observable.ref,
+      params: computed,
       setQueryString: action,
     });
   }
+
   setQueryString(queryString: string): void {
     queryString = queryString.startsWith('?') ? queryString.slice(1) : queryString;
     if (this._queryString !== queryString) {
@@ -20,7 +22,12 @@ export default class QueryParamsStore {
       this._params = qs.parse(queryString);
     }
   }
-  geParam(key: string): string | string[] | qs.ParsedQs | qs.ParsedQs[] | undefined {
+
+  getParam(key: string): string | string[] | qs.ParsedQs | qs.ParsedQs[] | undefined {
     return this._params[key];
+  }
+
+  get params(): qs.ParsedQs {
+    return this._params;
   }
 }

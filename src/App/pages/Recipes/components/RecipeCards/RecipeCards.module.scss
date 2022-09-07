@@ -1,14 +1,14 @@
 @use 'styles/variables' as v;
 @use 'styles/mixins' as m;
 
-.cards {
+.recipeCards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 8px;
 }
 
-.cards__item {
+.recipeCards__item {
   width: 32%;
   min-width: 155px;
   min-height: 209px;
