@@ -48,8 +48,10 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
   }
 
   getRecipeList = async (number?: number): Promise<void> => {
-    const offset = rootStore.query.getParam('offset') as string;
+    this._hasMore = true;
+    const offset = number ? '0' : `${this._list.length}`;
     this._meta = Meta.loading;
+
     try {
       const result = await rootStore.apiStore.request<RecipesDataApi>({
         method: HTTPMethod.GET,
@@ -59,7 +61,7 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
         params: {
           type: getTypes(this._multiDropdown.selectedValues),
           addRecipeNutrition: true,
-          number: number ? number + numberOfItems : numberOfItems,
+          number: number ? number : numberOfItems,
           offset: offset,
           query: rootStore.query.getParam('search'),
         },
@@ -67,6 +69,8 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
       runInAction(() => {
         if (result.success) {
           if (this._list.length >= result.data.totalResults) {
+            // eslint-disable-next-line no-console
+            console.log(this._list.length, result.data.totalResults);
             this._hasMore = false;
             return;
           }
@@ -78,6 +82,9 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
             } else {
               this._list = [];
               this._list = data.results;
+            }
+            if (result.data.totalResults < 9) {
+              this._hasMore = false;
             }
             return;
           } catch (e) {
@@ -92,16 +99,10 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
     }
   };
 
-  private readonly _queryStringReaction: IReactionDisposer = reaction(
-    () => rootStore.query.getParam('offset') || rootStore.query.getParam('search'),
-    async (curValue) => {
-      await this.getRecipeList();
-    }
-  );
-
   private readonly _selectValueReaction: IReactionDisposer = reaction(
     () => this.multiDropdown.selectedValues,
     async (curValue) => {
+      this._list = [];
       await this.getRecipeList();
     }
   );
@@ -110,7 +111,6 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
     this._meta = Meta.initial;
     this._list = [];
     this._hasMore = true;
-    this._queryStringReaction();
     this._selectValueReaction();
   }
 }

@@ -27,15 +27,19 @@ export default class DetailRecipeStore implements IDetailRecipeStore, ILocalStor
       getDetailRecipe: action,
     });
   }
+
   get item(): DetailRecipeItemModel | null {
     return this._item;
   }
+
   get meta(): Meta {
     return this._meta;
   }
+
   get id(): string | undefined {
     return this._id;
   }
+
   getDetailRecipe = async (): Promise<void> => {
     this._meta = Meta.loading;
     this._item = null;
@@ -63,9 +67,8 @@ export default class DetailRecipeStore implements IDetailRecipeStore, ILocalStor
     } catch (e) {
       this._meta = Meta.error;
     }
-    // eslint-disable-next-line no-console
-    console.log('get', this._meta, this._item);
   };
+
   destroy(): void {
     this._meta = Meta.initial;
     this._item = null;

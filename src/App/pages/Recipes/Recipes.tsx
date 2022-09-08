@@ -10,6 +10,7 @@ import RecipeCards from '@pages/Recipes/components/RecipeCards/RecipeCards';
 import { Meta } from '@projectTypes/enums';
 import { Option } from '@projectTypes/types';
 import rootStore from '@store/RootStore';
+import { numberOfItems } from '@utils/numberOfItems';
 import { options } from '@utils/options';
 import { observer } from 'mobx-react-lite';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -22,46 +23,50 @@ const Recipes: React.FC = () => {
   const [qs, setQs] = Router.useSearchParams();
 
   useEffect(() => {
-    setQs(rootStore.queryParams.params);
-    const number = rootStore.query.getParam('offset') ?? 0;
-    recipeListStore.getRecipeList(+number);
-    return () => {
-      rootStore.queryParams.setAllParams(rootStore.query.params as Record<string, string | string[]>);
-    };
+    const number = +(rootStore.query.getParam('offset') as string) ?? 0;
+    setQs(rootStore.query.params as Record<string, string | string[]>);
+    recipeListStore.getRecipeList(+number + numberOfItems);
   }, []);
 
   const pluralizeOptions = useCallback((elements: Option[]) => {
     return elements.length ? elements.map((el: Option) => el.value).join(', ') : 'Pick categories';
   }, []);
 
-  const handleChange = useCallback((value: string): void => {
-    rootStore.queryParams.setParams('search', value);
-    setQs(rootStore.queryParams.params);
-  }, []);
-
-  const handleSelect = useCallback(
-    (value: Option[]) => {
-      rootStore.queryParams.deleteParam('search');
-      rootStore.queryParams.setParams('offset', '0');
+  const handleChange = useCallback(
+    (value: string): void => {
+      rootStore.queryParams.setParams('search', value);
       setQs(rootStore.queryParams.params);
-      recipeListStore.multiDropdown.setSelectedValues(value);
     },
-    [recipeListStore.multiDropdown]
+    [setQs]
   );
 
-  const handleSubmit = useCallback((event: FormEvent) => {
-    event.preventDefault();
-    recipeListStore.multiDropdown.setSelectedValues([]);
-    recipeListStore.multiDropdown.close();
-    rootStore.queryParams.setParams('offset', '0');
-    setQs(rootStore.queryParams.params);
-  }, []);
+  const handleSelect = useCallback(
+    async (value: Option[]) => {
+      rootStore.queryParams.deleteParam('search');
+      rootStore.queryParams.setParams('offset', '0');
+      await setQs(rootStore.queryParams.params);
+      recipeListStore.multiDropdown.setSelectedValues(value);
+    },
+    [recipeListStore.multiDropdown.setSelectedValues, rootStore.queryParams.setParams, setQs]
+  );
+
+  const handleSubmit = useCallback(
+    (event: FormEvent) => {
+      event.preventDefault();
+      recipeListStore.multiDropdown.setSelectedValues([]);
+      recipeListStore.multiDropdown.close();
+      rootStore.queryParams.setParams('offset', '0');
+      setQs(rootStore.queryParams.params);
+    },
+    [recipeListStore.multiDropdown.setSelectedValues, recipeListStore.multiDropdown.close, setQs]
+  );
 
   const getNextRecipes = useCallback(async () => {
     const offset = recipeListStore.list.length;
     rootStore.queryParams.setParams('offset', `${offset}`);
     setQs(rootStore.queryParams.params);
-  }, [recipeListStore.list.length]);
+    recipeListStore.getRecipeList();
+  }, []);
 
   return (
     <div className={styles.recipes}>

@@ -11,6 +11,7 @@ export default class QueryParamsStore {
     makeObservable<QueryParamsStore, PrivateFields>(this, {
       _params: observable.ref,
       params: computed,
+      queryString: computed,
       setQueryString: action,
     });
   }
@@ -25,6 +26,10 @@ export default class QueryParamsStore {
 
   getParam(key: string): string | string[] | qs.ParsedQs | qs.ParsedQs[] | undefined {
     return this._params[key];
+  }
+
+  get queryString() {
+    return this._queryString;
   }
 
   get params(): qs.ParsedQs {
