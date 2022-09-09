@@ -24,7 +24,8 @@ const Recipes: React.FC = () => {
 
   useEffect(() => {
     const number = +(rootStore.query.getParam('offset') as string) ?? 0;
-    setQs(rootStore.query.params as Record<string, string | string[]>);
+    const params = rootStore.query.queryString ? rootStore.query.params : rootStore.queryParams.params;
+    setQs(params as Record<string, string | string[]>);
     recipeListStore.getRecipeList(+number + numberOfItems);
   }, []);
 
