@@ -9,6 +9,11 @@ export type RequestParams<ReqT> = {
   params: Record<string, string | number | boolean | Array<string> | undefined | qs.ParsedQs | qs.ParsedQs[]>;
 };
 
+export type GetDataParams = {
+  endpoint: string;
+  params: Record<string, string | number | boolean | Array<string> | undefined | qs.ParsedQs | qs.ParsedQs[]>;
+};
+
 export enum StatusHTTP {
   Success = 200,
   BadRequest = 400,

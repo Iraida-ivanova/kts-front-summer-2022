@@ -1,4 +1,4 @@
-import { IIngredientApi } from './Ingridient';
+import { IIngredientApi, IIngredientModel, normalizeIIngredient } from './ingridient';
 
 export interface IDetailRecipeItemApi {
   id: number;
@@ -11,17 +11,19 @@ export interface IDetailRecipeItemApi {
   extendedIngredients: IIngredientApi[];
   instructions: string;
 }
+
 export type DetailRecipeItemModel = {
   id: number;
   image: string;
   title: string;
   readyInMinutes: number;
-  ingredients: IIngredientApi[];
+  ingredients: IIngredientModel[];
   instructions: string | null;
   summary: string;
   likes: number;
   dishTypes: Array<string>;
 };
+
 export const normalizeDetailRecipeItem = (from: IDetailRecipeItemApi): DetailRecipeItemModel => {
   return {
     id: from.id,
@@ -29,7 +31,7 @@ export const normalizeDetailRecipeItem = (from: IDetailRecipeItemApi): DetailRec
     image: from.image,
     dishTypes: from.dishTypes,
     readyInMinutes: from.readyInMinutes,
-    ingredients: from.extendedIngredients,
+    ingredients: from.extendedIngredients.map((item) => normalizeIIngredient(item)),
     likes: from.aggregateLikes,
     instructions: from.instructions || null,
     summary: from.summary,

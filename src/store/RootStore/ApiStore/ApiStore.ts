@@ -1,11 +1,12 @@
 import { HTTPMethod } from '@projectTypes/enums';
 import axios from 'axios';
 
-import { ApiResponse, IApiStore, RequestParams, StatusHTTP } from './types';
+import { ApiResponse, GetDataParams, IApiStore, RequestParams, StatusHTTP } from './types';
 
 export default class ApiStore implements IApiStore {
   readonly baseUrl: string;
   readonly apiKey?: string;
+
   constructor(baseUrl: string, apiKey?: string) {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
@@ -59,5 +60,14 @@ export default class ApiStore implements IApiStore {
         status: StatusHTTP.UnExpectedError,
       };
     }
+  }
+
+  async getData<SuccessT, ErrorT = any>(params: GetDataParams): Promise<ApiResponse<SuccessT, ErrorT>> {
+    return await this.request<SuccessT, ErrorT>({
+      method: HTTPMethod.GET,
+      headers: {},
+      data: {},
+      ...params,
+    });
   }
 }

@@ -1,11 +1,11 @@
-import { HTTPMethod, Meta } from '@projectTypes/enums';
+import { Meta } from '@projectTypes/enums';
 import {
   DetailRecipeItemModel,
   IDetailRecipeItemApi,
   normalizeDetailRecipeItem,
-} from '@store/models/Food/DetailRecipeItem';
+} from '@store/models/Food/detailRecipeItem';
 import rootStore from '@store/RootStore';
-import { ILocalStore } from '@utils/UseLocalStore';
+import { ILocalStore } from '@utils/useLocalStore';
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 
 import { IDetailRecipeStore } from './types';
@@ -24,6 +24,8 @@ export default class DetailRecipeStore implements IDetailRecipeStore, ILocalStor
       _item: observable.ref,
       meta: computed,
       item: computed,
+      loading: computed,
+      hasSuccess: computed,
       getDetailRecipe: action,
     });
   }
@@ -40,15 +42,20 @@ export default class DetailRecipeStore implements IDetailRecipeStore, ILocalStor
     return this._id;
   }
 
+  get loading(): boolean {
+    return this._meta === Meta.loading;
+  }
+
+  get hasSuccess(): boolean {
+    return this._meta === Meta.success;
+  }
+
   getDetailRecipe = async (): Promise<void> => {
     this._meta = Meta.loading;
     this._item = null;
     try {
-      const result = await rootStore.apiStore.request<IDetailRecipeItemApi>({
-        method: HTTPMethod.GET,
-        data: {},
+      const result = await rootStore.apiStore.getData<IDetailRecipeItemApi>({
         endpoint: `/recipes/${this._id}/information`,
-        headers: {},
         params: {},
       });
       runInAction(() => {

@@ -3,14 +3,13 @@ import React from 'react';
 import Button from '@components/Button';
 import Likes from '@components/Likes';
 import { ButtonColor } from '@projectTypes/enums';
-import { RecipeItemModel } from '@store/models/Food/RecipeItem';
+import { RecipeItemModel } from '@store/models/Food/recipeItem';
 import { getStringOfIngredients } from '@utils/utils';
 
 import styles from './RecipeCard.module.scss';
 
 type RecipeCardProps = {
   item: RecipeItemModel;
-  /** Клик на карточку */
   onClick?: React.MouseEventHandler;
 };
 

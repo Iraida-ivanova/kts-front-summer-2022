@@ -1,10 +1,10 @@
-import { HTTPMethod, Meta } from '@projectTypes/enums';
-import { RecipeItemModel } from '@store/models/Food/RecipeItem';
-import { normalizeRecipesData, RecipesDataApi } from '@store/models/Food/RecipesData';
+import { Meta } from '@projectTypes/enums';
+import { RecipeItemModel } from '@store/models/Food/recipeItem';
+import { normalizeRecipesData, RecipesDataApi } from '@store/models/Food/recipesData';
 import MultiDropdownStore from '@store/MultiDropdownStore';
 import rootStore from '@store/RootStore';
 import { numberOfItems } from '@utils/numberOfItems';
-import { ILocalStore } from '@utils/UseLocalStore';
+import { ILocalStore } from '@utils/useLocalStore';
 import { getTypes } from '@utils/utils';
 import { action, computed, IReactionDisposer, makeObservable, observable, reaction, runInAction } from 'mobx';
 
@@ -16,7 +16,7 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
   private _list: RecipeItemModel[] = [];
   private _meta: Meta = Meta.initial;
   private _hasMore: boolean = true;
-  private _multiDropdown: MultiDropdownStore = new MultiDropdownStore();
+  private _multiDropdownStore: MultiDropdownStore = new MultiDropdownStore();
 
   constructor() {
     makeObservable<RecipeListStore, PrivateFields>(this, {
@@ -25,7 +25,9 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
       _hasMore: observable,
       meta: computed,
       list: computed,
+      loading: computed,
       hasMore: computed,
+      hasError: computed,
       getRecipeList: action,
       destroy: action,
     });
@@ -39,12 +41,20 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
     return this._meta;
   }
 
-  get multiDropdown(): MultiDropdownStore {
-    return this._multiDropdown;
+  get multiDropdownStore(): MultiDropdownStore {
+    return this._multiDropdownStore;
   }
 
   get hasMore(): boolean {
     return this._hasMore;
+  }
+
+  get loading(): boolean {
+    return this._meta === Meta.loading;
+  }
+
+  get hasError(): boolean {
+    return this._meta === Meta.error;
   }
 
   getRecipeList = async (number?: number): Promise<void> => {
@@ -53,24 +63,19 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
     this._meta = Meta.loading;
 
     try {
-      const result = await rootStore.apiStore.request<RecipesDataApi>({
-        method: HTTPMethod.GET,
-        headers: {},
-        data: {},
+      const result = await rootStore.apiStore.getData<RecipesDataApi>({
         endpoint: '/recipes/complexSearch',
         params: {
-          type: getTypes(this._multiDropdown.selectedValues),
+          type: getTypes(this._multiDropdownStore.selectedValues),
           addRecipeNutrition: true,
-          number: number ? number : numberOfItems,
-          offset: offset,
-          query: rootStore.query.getParam('search'),
+          number: number ?? numberOfItems,
+          offset,
+          query: rootStore.query.getDuplicateParam('search'),
         },
       });
       runInAction(() => {
         if (result.success) {
           if (this._list.length >= result.data.totalResults) {
-            // eslint-disable-next-line no-console
-            console.log(this._list.length, result.data.totalResults);
             this._hasMore = false;
             return;
           }
@@ -83,7 +88,7 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
               this._list = [];
               this._list = data.results;
             }
-            if (result.data.totalResults < 9) {
+            if (result.data.totalResults < numberOfItems) {
               this._hasMore = false;
             }
             return;
@@ -100,8 +105,8 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
   };
 
   private readonly _selectValueReaction: IReactionDisposer = reaction(
-    () => this.multiDropdown.selectedValues,
-    async (curValue) => {
+    () => this._multiDropdownStore.selectedValues,
+    async () => {
       this._list = [];
       await this.getRecipeList();
     }

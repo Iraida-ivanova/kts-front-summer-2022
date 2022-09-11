@@ -4,21 +4,24 @@ import Button from '@components/Button';
 import Likes from '@components/Likes';
 import ReturnIcon from '@components/ReturnIcon';
 import WithLoader from '@components/WithLoader';
-import { LoaderSize, Meta } from '@projectTypes/enums';
+import { LoaderSize } from '@projectTypes/enums';
 import DetailRecipeStore from '@store/DetailRecipeStore';
-import { IIngredientApi } from '@store/models/Food/Ingridient';
-import { useLocalStore } from '@utils/UseLocalStore';
+import { IIngredientApi } from '@store/models/Food/ingridient';
+import { useLocalStore } from '@utils/useLocalStore';
 import { observer } from 'mobx-react-lite';
 import { Link, useParams } from 'react-router-dom';
 
 import styles from './DetailRecipe.module.scss';
 
 const DetailRecipe: React.FC = () => {
-  const { id } = useParams();
-  const detailRecipeStore = useLocalStore<DetailRecipeStore>(() => new DetailRecipeStore(id));
+  const { recipeId } = useParams();
+  const { id, item, loading, hasSuccess, getDetailRecipe } = useLocalStore<DetailRecipeStore>(
+    () => new DetailRecipeStore(recipeId)
+  );
+
   useEffect(() => {
-    detailRecipeStore.getDetailRecipe();
-  }, [detailRecipeStore.id]);
+    getDetailRecipe();
+  }, [id]);
 
   return (
     <div className={styles.detailRecipe}>
@@ -27,39 +30,30 @@ const DetailRecipe: React.FC = () => {
           <ReturnIcon />
         </Button>
       </Link>
-      <WithLoader loading={detailRecipeStore.meta === Meta.loading} size={LoaderSize.l}>
-        {detailRecipeStore.meta === Meta.success && detailRecipeStore.item && (
+      <WithLoader loading={loading} size={LoaderSize.l}>
+        {hasSuccess && item && (
           <>
-            <img
-              className={styles.detailRecipe__image}
-              src={detailRecipeStore.item.image}
-              alt={`${detailRecipeStore.item.title}`}
-            />
+            <img className={styles.detailRecipe__image} src={item.image} alt={`${item.title}`} />
             <div className={styles.detailRecipe__wrapper}>
               <div className={styles.detailRecipe__scroll}></div>
               <div className={styles.detailRecipe__content}>
-                <h1 className={styles.detailRecipe__title}>{detailRecipeStore.item.title}</h1>
-                <Likes likes={detailRecipeStore.item.likes} className={styles.detailRecipe__likes} />
-                <div className={styles.detailRecipe__category}>{detailRecipeStore.item.dishTypes.join(', ')}</div>
-                <div className={styles.detailRecipe__time}>
-                  Сooking time: {detailRecipeStore.item.readyInMinutes} minutes
-                </div>
-                <div
-                  className={styles.detailRecipe__summary}
-                  dangerouslySetInnerHTML={{ __html: detailRecipeStore.item.summary }}
-                ></div>
+                <h1 className={styles.detailRecipe__title}>{item.title}</h1>
+                <Likes likes={item.likes} className={styles.detailRecipe__likes} />
+                <div className={styles.detailRecipe__category}>{item.dishTypes.join(', ')}</div>
+                <div className={styles.detailRecipe__time}>Сooking time: {item.readyInMinutes} minutes</div>
+                <div className={styles.detailRecipe__summary} dangerouslySetInnerHTML={{ __html: item.summary }}></div>
                 <div className={styles.detailRecipe__ingredients}>
                   <h3>Ingredients:</h3>
                   <ul>
-                    {detailRecipeStore.item.ingredients.map((product: IIngredientApi) => (
+                    {item.ingredients.map((product: IIngredientApi) => (
                       <li key={product.id + product.name}>{product.name}</li>
                     ))}
                   </ul>
                 </div>
-                {detailRecipeStore.item.instructions && (
+                {item.instructions && (
                   <div className={styles.detailRecipe__instructions}>
                     <h3>Instructions</h3>
-                    <div dangerouslySetInnerHTML={{ __html: detailRecipeStore.item.instructions }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: item.instructions }}></div>
                   </div>
                 )}
               </div>

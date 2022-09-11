@@ -1,7 +1,7 @@
 import React from 'react';
 
 import RecipeCard from '@pages/Recipes/components/RecipeCard';
-import { RecipeItemModel } from '@store/models/Food/RecipeItem';
+import { RecipeItemModel } from '@store/models/Food/recipeItem';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './RecipeCards.module.scss';
@@ -16,7 +16,7 @@ const RecipeCards: React.FC<RecipeCardsProps> = ({ items }) => {
     <div className={styles.recipeCards}>
       {items.map((item) => (
         <div key={item.id} className={styles.recipeCards__item}>
-          <RecipeCard item={item} onClick={() => navigate(`${item.id}`)} />
+          <RecipeCard item={item} onClick={() => navigate(`recipe/${item.id}`)} />
         </div>
       ))}
     </div>

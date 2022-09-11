@@ -1,5 +1,5 @@
 import { Option } from '@projectTypes/types';
-import { ILocalStore } from '@utils/UseLocalStore';
+import { ILocalStore } from '@utils/useLocalStore';
 import { action, computed, makeObservable, observable } from 'mobx';
 
 type PrivateFields = '_isOpened' | '_selectedValues';
