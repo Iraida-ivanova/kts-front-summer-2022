@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({ loading, color = ButtonColor.primary, c
   const isDisabled = rest.disabled || loading;
   const buttonClass = classNames(`${styles.button}`, {
     [`${styles[`button_color-${color}`]}`]: true,
-    [`${styles.button_disabled}`]: isDisabled,
+    [styles.button_disabled]: isDisabled,
     [`${className}`]: className,
   });
 

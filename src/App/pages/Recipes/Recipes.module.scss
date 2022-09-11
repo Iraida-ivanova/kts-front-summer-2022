@@ -10,6 +10,7 @@
   }
   @include m.media-max767 {
     max-width: 500px;
+    padding: 24px 3px;
   }
 }
 
@@ -20,17 +21,31 @@
   display: flex;
   gap: v.$margin;
 
-  input {
-    flex-grow: 1;
-  }
-
   @include m.media-max767 {
     flex-direction: column;
     align-items: end;
-    input {
+    .recipes__search {
       width: 100%;
     }
   }
+}
+
+.recipes__search {
+  flex-grow: 1;
+  position: relative;
+
+  input {
+    width: 100%;
+  }
+}
+
+.recipes__searchBtn {
+  height: 100%;
+  width: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #F5F5F500;
 }
 
 .multiDropdownWrapper {

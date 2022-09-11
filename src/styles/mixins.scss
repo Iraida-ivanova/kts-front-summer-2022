@@ -13,6 +13,7 @@
 
 @mixin disabled() {
   opacity: .4;
+  cursor: auto;
 }
 
 @mixin gradient($opacity: 1) {

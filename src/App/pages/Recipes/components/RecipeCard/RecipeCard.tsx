@@ -3,26 +3,26 @@ import React from 'react';
 import Button from '@components/Button';
 import Likes from '@components/Likes';
 import { ButtonColor } from '@projectTypes/enums';
-import { RecipeCard } from '@projectTypes/types';
+import { RecipeItemModel } from '@store/models/Food/recipeItem';
+import { getStringOfIngredients } from '@utils/utils';
 
-import styles from './Card.module.scss';
+import styles from './RecipeCard.module.scss';
 
-type CardProps = {
-  item: RecipeCard;
-  /** Клик на карточку */
+type RecipeCardProps = {
+  item: RecipeItemModel;
   onClick?: React.MouseEventHandler;
 };
 
-const Card: React.FC<CardProps> = ({ item, onClick }) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({ item, onClick }) => {
   return (
     <div className={styles.card} onClick={onClick}>
       <Likes likes={item.likes} className={styles.card__likes} />
       <img className={styles.card__image} src={item.image} alt={`${item.title}`} />
       <h2 className={styles.card__title}>{item.title}</h2>
-      <div className={styles.card__category}>{item.types}</div>
-      <div className={styles.card__subtitle}>{item.subtitle}</div>
+      <div className={styles.card__category}>{item.dishTypes.join(', ')}</div>
+      <div className={styles.card__subtitle}>{item.ingredients && getStringOfIngredients(item.ingredients)}</div>
       <div className={styles.card__content}>
-        <div className={styles.card__contentLeft}>{item.content}</div>
+        <div className={styles.card__calories}>{item.calories}</div>
         <Button color={ButtonColor.primary} className={styles.card__button_rectangle}>
           Order
         </Button>
@@ -34,4 +34,4 @@ const Card: React.FC<CardProps> = ({ item, onClick }) => {
   );
 };
 
-export default React.memo(Card);
+export default React.memo(RecipeCard);

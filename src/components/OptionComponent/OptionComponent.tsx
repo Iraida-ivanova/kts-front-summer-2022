@@ -13,7 +13,7 @@ export type OptionProps = {
 
 const OptionComponent: React.FC<OptionProps> = ({ option, selected, onClick }) => {
   const optionClassName = classNames(`${styles.multiDropdown__option}`, {
-    [`${styles.multiDropdown__option_selected}`]: selected,
+    [styles.multiDropdown__option_selected]: selected,
   });
 
   return (

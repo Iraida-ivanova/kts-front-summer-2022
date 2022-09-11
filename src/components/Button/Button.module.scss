@@ -7,12 +7,16 @@
   @include m.aline-center();
   cursor: pointer;
 
-  &_disabled {
-    @include m.disabled();
-  }
-
   &:hover {
     opacity: .8;
+  }
+
+  &_disabled {
+    @include m.disabled();
+
+    &:hover {
+      @include m.disabled();
+    }
   }
 }
 
