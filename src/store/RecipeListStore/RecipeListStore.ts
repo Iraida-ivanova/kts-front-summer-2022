@@ -75,12 +75,12 @@ export default class RecipeListStore implements IRecipeListStore, ILocalStore {
       });
       runInAction(() => {
         if (result.success) {
+          this._meta = Meta.success;
           if (this._list.length >= result.data.totalResults) {
             this._hasMore = false;
             return;
           }
           try {
-            this._meta = Meta.success;
             const data = normalizeRecipesData(result.data);
             if (+offset > 0) {
               this._list = [...this._list, ...data.results];
