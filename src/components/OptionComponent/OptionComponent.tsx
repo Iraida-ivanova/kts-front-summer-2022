@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Option } from '@projectTypes/types';
 import classNames from 'classnames';
+import { Option } from 'projectTypes/types';
 
 import styles from './OptionComponent.module.scss';
 

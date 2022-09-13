@@ -1,20 +1,20 @@
 import React, { createContext, FormEvent, useCallback, useContext, useEffect } from 'react';
 
-import Button from '@components/Button';
-import Input from '@components/Input';
-import Loader from '@components/Loader';
-import MultiDropdown from '@components/MultiDropdown';
-import SearchIcon from '@components/SearchIcon';
-import RecipeCards from '@pages/Recipes/components/RecipeCards/RecipeCards';
-import { Option } from '@projectTypes/types';
-import RecipeListStore from '@store/RecipeListStore';
-import rootStore from '@store/RootStore';
-import { numberOfItems } from '@utils/numberOfItems';
-import { options } from '@utils/options';
-import { useLocalStore } from '@utils/useLocalStore';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import Loader from 'components/Loader';
+import MultiDropdown from 'components/MultiDropdown';
+import SearchIcon from 'components/SearchIcon';
 import { observer } from 'mobx-react-lite';
+import RecipeCards from 'pages/Recipes/components/RecipeCards/RecipeCards';
+import { Option } from 'projectTypes/types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import * as Router from 'react-router-dom';
+import RecipeListStore from 'store/RecipeListStore';
+import rootStore from 'store/RootStore';
+import { numberOfItems } from 'utils/numberOfItems';
+import { options } from 'utils/options';
+import { useLocalStore } from 'utils/useLocalStore';
 
 import styles from './Recipes.module.scss';
 
@@ -23,9 +23,10 @@ export const useRecipesContext = () => useContext(RecipesContext);
 
 const Recipes: React.FC = () => {
   const recipeListStore = useLocalStore(() => new RecipeListStore());
-  const [qs, setQs] = Router.useSearchParams();
+  const [, setQs] = Router.useSearchParams();
 
   const upDateQs = (): void => setQs(rootStore.query.duplicateParams);
+
   useEffect(() => {
     if (rootStore.query.queryString) {
       rootStore.query.setDuplicateParams(rootStore.query.params as Record<string, string | string[]>);

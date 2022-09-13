@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Loader from '@components/Loader';
-import { LoaderSize } from '@projectTypes/enums';
+import Loader from 'components/Loader';
+import { LoaderSize } from 'projectTypes/enums';
 
 export type WithLoaderProps = React.PropsWithChildren<{
   loading: boolean;

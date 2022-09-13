@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LikeIcon from '@components/LikeIcon';
 import classNames from 'classnames';
+import LikeIcon from 'components/LikeIcon';
 
 import styles from './Likes.module.scss';
 

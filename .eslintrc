@@ -1,14 +1,59 @@
 {
-  "extends": [
-    "react-app",
-    "plugin:prettier/recommended",
-    "prettier"
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "prettier",
+    "react"
   ],
-  "plugins": ["prettier"],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "parserOptions": {
+        "project": "./**/tsconfig.json",
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+      },
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "react/no-direct-mutation-state": "off",
+        "react/no-deprecated": "off",
+        "react/no-string-refs": "off",
+        "react/require-render-return": "off",
+        "react/jsx-filename-extension": [
+          "warn",
+          {
+            "extensions": [
+              ".jsx",
+              ".tsx"
+            ]
+          }
+        ],
+        "react/prop-types": "off"
+      }
+    }
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
   "rules": {
     "no-console": "error",
     "prettier/prettier": "error",
-    "quotes": [2, "single", "avoid-escape"],
+    "quotes": [
+      2,
+      "single",
+      "avoid-escape"
+    ],
     "import/order": [
       "error",
       {
@@ -34,5 +79,10 @@
         }
       }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

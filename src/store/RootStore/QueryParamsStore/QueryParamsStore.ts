@@ -1,12 +1,12 @@
-import { numberOfItems } from '@utils/numberOfItems';
 import { action, computed, makeObservable, observable } from 'mobx';
 import * as qs from 'qs';
+import { numberOfItems } from 'utils/numberOfItems';
 
 type PrivateFields = '_params' | '_duplicateParams';
 
 export default class QueryParamsStore {
   private _params: qs.ParsedQs = {}; //параметры запроса, распарсенные из url
-  private _queryString: string = ''; //qs, распарсенная из url
+  private _queryString = ''; //qs, распарсенная из url
   private _duplicateParams: Record<string, string | string[]> = { offset: '0', number: `${numberOfItems}` };
 
   constructor() {

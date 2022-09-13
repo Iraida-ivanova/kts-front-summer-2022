@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 
-import OptionComponent from '@components/OptionComponent';
-import { useRecipesContext } from '@pages/Recipes/Recipes';
-import { Option } from '@projectTypes/types';
 import classNames from 'classnames';
+import OptionComponent from 'components/OptionComponent';
 import { observer } from 'mobx-react-lite';
+import { useRecipesContext } from 'pages/Recipes/Recipes';
+import { Option } from 'projectTypes/types';
 
 import styles from './MultiDropdown.module.scss';
 

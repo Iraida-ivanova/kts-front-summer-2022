@@ -1,10 +1,10 @@
-import { Option } from '@projectTypes/types';
-import { ILocalStore } from '@utils/useLocalStore';
 import { action, computed, makeObservable, observable } from 'mobx';
+import { Option } from 'projectTypes/types';
+import { ILocalStore } from 'utils/useLocalStore';
 
 type PrivateFields = '_isOpened' | '_selectedValues';
 export default class MultiDropdownStore implements ILocalStore {
-  private _isOpened: boolean = false;
+  private _isOpened = false;
   private _selectedValues: Option[] = [];
 
   constructor() {

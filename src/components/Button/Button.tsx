@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Loader from '@components/Loader';
-import { ButtonColor, LoaderSize } from '@projectTypes/enums';
 import classNames from 'classnames';
+import Loader from 'components/Loader';
+import { ButtonColor, LoaderSize } from 'projectTypes/enums';
 
 import styles from './Button.module.scss';
 

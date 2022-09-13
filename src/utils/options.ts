@@ -1,4 +1,4 @@
-import { Option } from '@projectTypes/types';
+import { Option } from 'projectTypes/types';
 
 export const options: Option[] = [
   {

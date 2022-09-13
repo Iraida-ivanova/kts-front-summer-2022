@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoaderSize } from '@projectTypes/enums';
+import { LoaderSize } from 'projectTypes/enums';
 
 import styles from './Loader.module.scss';
 
