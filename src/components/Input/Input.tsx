@@ -12,7 +12,7 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onCh
 const Input: React.FC<InputProps> = ({ value, onChange, className, ...props }) => {
   const inputClass = classNames(styles.input, {
     [styles.input_disabled]: props.disabled,
-    [`${styles[`${className}`]}`]: className,
+    [styles[`${className}`]]: className,
   });
   return (
     <input type="text" value={value} onChange={(e) => onChange(e.target.value)} className={inputClass} {...props} />

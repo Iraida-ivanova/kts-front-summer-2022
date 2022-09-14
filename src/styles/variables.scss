@@ -4,6 +4,7 @@ $pink-color: #FFCBCB;
 $white-color: #FFFFFF;
 $background-color: #F5F5F5;
 $base-border-radius: 7px;
+$large-border-radius: 10px;
 $drop-padding: 4px 4px 4px 19px;
 $checkbox-color: #FFDFF0;
 $black-color: #000000;
@@ -12,6 +13,9 @@ $dark-blue-text-color: #09051C;
 $grey-text-color: #3B3B3B;
 $margin: 16px;
 $margin-large: 28px;
+$box-shadow: 0 1px 8px 0 #0000001F;
+$on-hover-shadow: 2px 3px 8px 2px darken(#0000001F, 0.7);
+$on-hover-light-shadow: 1px 1px 6px 1px #0000001F;
 
 $large-width: 1000px;
 $medium-width: 767px;

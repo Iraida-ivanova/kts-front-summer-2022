@@ -48,12 +48,34 @@
   border-left-color: $left-color;
 }
 
-@mixin likes($font:12px, $gap: 4px, $color: v.$dark-text-color, $opacity: 1) {
+@mixin likes($font: 12px, $gap: 4px, $color: v.$dark-text-color, $opacity: 1) {
   font-size: $font;
   gap: $gap;
   color: $color;
   div:last-child {
     opacity: $opacity;
+  }
+}
+
+@mixin transition-shadow($shadow: v.$on-hover-shadow, $radius: v.$large-border-radius) {
+  position: relative;
+  border-radius: $radius;
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: $radius;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    box-shadow: $shadow;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  &:hover::after {
+    opacity: 1;
   }
 }
 

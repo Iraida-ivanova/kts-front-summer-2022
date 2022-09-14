@@ -33,6 +33,7 @@
 .recipes__search {
   flex-grow: 1;
   position: relative;
+  @include m.transition-shadow(v.$on-hover-light-shadow, v.$base-border-radius);
 
   input {
     width: 100%;
