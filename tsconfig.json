@@ -1,5 +1,4 @@
 {
-    "extends": "./tsconfig.paths.json",
     "compilerOptions": {
         "target": "es6",
         "allowJs": true,
@@ -12,7 +11,17 @@
         "moduleResolution": "node",
         "jsx": "react",
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "paths": {
+            "components/*": ["src/components/*"],
+            "projectTypes/*": ["src/projectTypes/*"],
+            "styles/*": ["src/styles/*"],
+            "utils/*": ["src/utils/*"],
+            "pages/*": ["src/App/pages/*"],
+            "App/*": ["src/App/*"],
+            "store/*": ["src/store/*"]
+        }
     },
     "include": [
         "src/**/*",

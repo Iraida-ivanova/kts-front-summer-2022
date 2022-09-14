@@ -4,6 +4,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const buildPath = path.resolve(__dirname, 'dist');
 const srcPath = path.resolve(__dirname, 'src');
 
@@ -39,7 +40,7 @@ module.exports = {
   devtool: isProd ? 'hidden-source-map' : 'eval-source-map',
   output: {
     path: buildPath,
-    filename: 'bundle.js',
+    filename: isProd ? 'bundle-[hash].js' : 'bundle.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -48,7 +49,7 @@ module.exports = {
     !isProd && new ReactRefreshWebpackPlugin(),
     isProd &&
       new MiniCssExtractPlugin({
-        filename: '[main]-[hash].css',
+        filename: '[name]-[hash].css',
       }),
     new ForkTsCheckerWebpackPlugin(),
   ].filter(Boolean),
@@ -69,7 +70,7 @@ module.exports = {
         use: getSettingsForStyles(),
       },
       {
-        test: /\.(png | svg | jpg)$/,
+        test: /\.(png|svg|jpg)$/,
         use: 'asset',
         parser: {
           dataUrlCondition: {

@@ -1,16 +1,13 @@
 {
-  "name": "kts-hw-5",
-  "version": "1.0.0",
-  "main": "index.tsx",
-  "repository": "https://github.com/Iraida-ivanova/kts-hw-3.git",
+  "name": "food-recipe-app",
+  "version": "0.1.0",
   "author": "Iraida22 <iraida.iva22@mail.ru>",
-  "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production npx webpack --mode=production",
     "dev": "cross-env NODE_ENV=development npx webpack serve --mode=development",
     "ts-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
     "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx,css,scss}\"",
-    "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx,css,css}\" --fix"
+    "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx,css,scss}\" --fix"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
