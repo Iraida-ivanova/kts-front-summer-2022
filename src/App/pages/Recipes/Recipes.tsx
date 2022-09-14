@@ -7,6 +7,7 @@ import MultiDropdown from 'components/MultiDropdown';
 import SearchIcon from 'components/SearchIcon';
 import { observer } from 'mobx-react-lite';
 import RecipeCards from 'pages/Recipes/components/RecipeCards/RecipeCards';
+import { LoaderSize } from 'projectTypes/enums';
 import { Option } from 'projectTypes/types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import * as Router from 'react-router-dom';
@@ -108,7 +109,7 @@ const Recipes: React.FC = () => {
               dataLength={recipeListStore.list.length}
               next={getNextRecipes}
               hasMore={recipeListStore.hasMore}
-              loader={<Loader />}
+              loader={<Loader size={LoaderSize.l} onScreen={true} />}
               style={{ overflow: 'hidden' }}
               endMessage={
                 <p style={{ textAlign: 'center' }}>

@@ -30,7 +30,7 @@ const DetailRecipe: React.FC = () => {
           <ReturnIcon />
         </Button>
       </Link>
-      <WithLoader loading={loading} size={LoaderSize.l}>
+      <WithLoader loading={loading} size={LoaderSize.l} onScreen={true}>
         {hasSuccess && item && (
           <>
             <img className={styles.detailRecipe__image} src={item.image} alt={`${item.title}`} />

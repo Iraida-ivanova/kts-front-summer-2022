@@ -2,16 +2,17 @@
 @use 'styles/mixins' as m;
 
 .mask {
-  position: fixed;
   width: 100%;
   height: 100%;
-  background-color: #FFFFFF;
-  top: 0;
-  z-index: 100;
+  background-color: #FFFFFF10;
   transition: 0.5s;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.loader_onScreen {
+  height: 60vh;
 }
 
 .loader {
