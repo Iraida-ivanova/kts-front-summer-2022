@@ -86,6 +86,7 @@ const Recipes: React.FC = () => {
               placeholder={'Search'}
               value={(rootStore.query.getParam('search') as string) || ''}
               onChange={handleChange}
+              disabled={recipeListStore.loading}
             />
             <Button className={styles.recipes__searchBtn} disabled={recipeListStore.loading}>
               <SearchIcon />
