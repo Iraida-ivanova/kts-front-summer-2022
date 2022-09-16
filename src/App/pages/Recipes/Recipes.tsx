@@ -1,6 +1,7 @@
 import React, { createContext, FormEvent, useCallback, useContext, useEffect } from 'react';
 
 import Button from 'components/Button';
+import CategoryList from 'components/CategoryList';
 import Input from 'components/Input';
 import Loader from 'components/Loader';
 import MultiDropdown from 'components/MultiDropdown';
@@ -16,6 +17,7 @@ import rootStore from 'store/RootStore';
 import { numberOfItems } from 'utils/numberOfItems';
 import { options } from 'utils/options';
 import { useLocalStore } from 'utils/useLocalStore';
+import { getTypes } from 'utils/utils';
 
 import styles from './Recipes.module.scss';
 
@@ -32,9 +34,18 @@ const Recipes: React.FC = () => {
     if (rootStore.query.queryString) {
       rootStore.query.setDuplicateParams(rootStore.query.params as Record<string, string | string[]>);
     }
-    const number = rootStore.query.getDuplicateParam('offset') ?? '0';
+
+    recipeListStore.input.setValue(rootStore.query.getDuplicateParam('search') as string);
+
+    if (rootStore.query.getDuplicateParam('type')) {
+      recipeListStore.multiDropdownStore.setSelectedValues(
+        options.filter((item) => (rootStore.query.getDuplicateParam('type') as string).includes(item.key))
+      );
+    }
     upDateQs();
-    recipeListStore.getRecipeList(+number + numberOfItems);
+
+    const number = rootStore.query.getDuplicateParam('offset') ?? '0';
+    recipeListStore.getRecipeList(0, +number + numberOfItems);
   }, []);
 
   const pluralizeOptions = useCallback((elements: Option[]) => {
@@ -43,29 +54,37 @@ const Recipes: React.FC = () => {
 
   const handleChange = useCallback(
     (value: string): void => {
-      rootStore.query.setDuplicateParam('search', value);
-      upDateQs();
+      recipeListStore.input.setValue(value);
     },
     [setQs]
   );
 
   const handleSelect = useCallback(
     async (value: Option[]) => {
-      rootStore.query.deleteDuplicateParam('search');
-      rootStore.query.setDuplicateParam('offset', '0');
-      await upDateQs();
       recipeListStore.multiDropdownStore.setSelectedValues(value);
+
+      rootStore.query.setDuplicateParam('offset', '0');
+      rootStore.query.setDuplicateParam('type', getTypes(recipeListStore.multiDropdownStore.selectedValues));
+      await upDateQs();
     },
     [recipeListStore.multiDropdownStore.setSelectedValues, rootStore.query.setDuplicateParam, setQs]
   );
 
+  const handleRemoveBtn = useCallback((value: Option): void => {
+    recipeListStore.multiDropdownStore.deleteFromSelectedValues(value);
+    rootStore.query.setDuplicateParam('type', getTypes(recipeListStore.multiDropdownStore.selectedValues));
+    rootStore.query.setDuplicateParam('offset', '0');
+    upDateQs();
+  }, []);
+
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-      recipeListStore.multiDropdownStore.setSelectedValues([]);
-      recipeListStore.multiDropdownStore.close();
       rootStore.query.setDuplicateParam('offset', '0');
+      rootStore.query.setDuplicateParam('search', recipeListStore.input.value);
       upDateQs();
+
+      recipeListStore.getRecipeList(0);
     },
     [recipeListStore.multiDropdownStore.setSelectedValues, recipeListStore.multiDropdownStore.close, setQs]
   );
@@ -74,7 +93,7 @@ const Recipes: React.FC = () => {
     const offset = recipeListStore.list.length;
     rootStore.query.setDuplicateParam('offset', `${offset}`);
     upDateQs();
-    recipeListStore.getRecipeList();
+    recipeListStore.getRecipeList(offset);
   }, []);
 
   return (
@@ -84,7 +103,7 @@ const Recipes: React.FC = () => {
           <form className={styles.recipes__search} onSubmit={handleSubmit}>
             <Input
               placeholder={'Search'}
-              value={(rootStore.query.getParam('search') as string) || ''}
+              value={recipeListStore.input.value ?? ''}
               onChange={handleChange}
               disabled={recipeListStore.loading}
             />
@@ -102,24 +121,40 @@ const Recipes: React.FC = () => {
             />
           </div>
         </div>
+        {recipeListStore.multiDropdownStore.selectedValues.length > 0 && (
+          <CategoryList options={recipeListStore.multiDropdownStore.selectedValues} onClick={handleRemoveBtn} />
+        )}
         <div>
           {recipeListStore.hasError ? (
             <div>LOADING HAVING PROBLEM...</div>
           ) : (
-            <InfiniteScroll
-              dataLength={recipeListStore.list.length}
-              next={getNextRecipes}
-              hasMore={recipeListStore.hasMore}
-              loader={<Loader size={LoaderSize.l} onScreen={true} />}
-              style={{ overflow: 'hidden' }}
-              endMessage={
-                <p style={{ textAlign: 'center' }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
-            >
-              <RecipeCards items={recipeListStore.list} />
-            </InfiniteScroll>
+            <div>
+              {rootStore.query.getParam('search') !== '' && recipeListStore.hasSuccess && (
+                <div className={styles.recipes__message}>
+                  {rootStore.query.getParam('search') &&
+                    (recipeListStore.list.length
+                      ? `SHOWING RESULTS FOR "${rootStore.query.getParam('search')}"`
+                      : `NO MATCHING RECIPES FOR "${rootStore.query.getParam('search')}"`)}
+                </div>
+              )}
+              <InfiniteScroll
+                dataLength={recipeListStore.list.length}
+                next={getNextRecipes}
+                hasMore={recipeListStore.hasMore}
+                loader={<Loader size={LoaderSize.l} onScreen={true} />}
+                style={{ overflow: 'hidden' }}
+                endMessage={
+                  <p style={{ textAlign: 'center' }}>
+                    <b>
+                      {recipeListStore.list.length > 0 &&
+                        `SHOWING ${recipeListStore.list.length} of ${recipeListStore.list.length} recipes`}
+                    </b>
+                  </p>
+                }
+              >
+                <RecipeCards items={recipeListStore.list} />
+              </InfiniteScroll>
+            </div>
           )}
         </div>
       </div>

@@ -1,0 +1,25 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+.category {
+  display: flex;
+  width: fit-content;
+  border-radius: v.$base-border-radius;
+  padding: v.$drop-padding;
+  @include m.text-area();
+  font-size: 1.4rem;
+  @include m.gradient();
+  color: v.$black-color;
+  gap: 10px;
+
+  &:hover {
+    @include m.gradient(.6);
+  }
+}
+
+.category__removeBtn {
+  color: v.$black-color;
+  font-family: Montserrat, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: #F5F5F500;
+  padding: 4px 4px 6px 4px;
+}

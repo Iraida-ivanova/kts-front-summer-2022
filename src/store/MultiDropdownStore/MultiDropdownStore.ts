@@ -16,6 +16,7 @@ export default class MultiDropdownStore implements ILocalStore {
       changeIsOpened: action,
       close: action,
       setSelectedValues: action,
+      deleteFromSelectedValues: action,
     });
   }
 
@@ -36,7 +37,13 @@ export default class MultiDropdownStore implements ILocalStore {
   }
 
   setSelectedValues(values: Option[]) {
+    // eslint-disable-next-line no-console
+    console.log('setSelectedValues', this._selectedValues);
     this._selectedValues = values;
+  }
+
+  deleteFromSelectedValues(value: Option) {
+    this._selectedValues = this._selectedValues.filter((item) => item.key !== value.key);
   }
 
   destroy(): void {

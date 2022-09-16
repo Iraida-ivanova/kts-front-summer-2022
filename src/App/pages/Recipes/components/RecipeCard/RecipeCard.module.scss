@@ -28,7 +28,6 @@
   font-size: 2rem;
   font-weight: 500;
   letter-spacing: -3%;
-  flex-grow: 1;
 }
 
 .card__category {
@@ -36,6 +35,7 @@
   opacity: .8;
   font-size: 1.4rem;
   line-height: 200%;
+  flex-grow: 1;
 }
 
 .card__subtitle {

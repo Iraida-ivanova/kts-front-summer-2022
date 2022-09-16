@@ -24,7 +24,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ item, onClick }) => {
       <div className={styles.card__content}>
         <div className={styles.card__calories}>{item.calories}</div>
         <Button color={ButtonColor.primary} className={styles.card__button_rectangle}>
-          Order
+          Detail
         </Button>
         <Button color={ButtonColor.primary} className={styles.card__button_round}>
           +

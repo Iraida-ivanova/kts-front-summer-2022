@@ -1,3 +1,3 @@
 export interface IRecipeListStore {
-  getRecipeList(): Promise<void>;
+  getRecipeList(offset: number, number?: number): Promise<void>;
 }

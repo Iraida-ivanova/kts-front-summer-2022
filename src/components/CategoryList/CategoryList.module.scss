@@ -1,0 +1,10 @@
+@use 'styles/variables' as v;
+@use 'styles/mixins' as m;
+
+.categoryList {
+  display: flex;
+  gap: v.$margin;
+  padding: 0 8px;
+  margin: 0 0 v.$margin-large;
+  flex-wrap: wrap;
+}

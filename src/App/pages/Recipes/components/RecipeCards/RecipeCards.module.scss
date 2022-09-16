@@ -16,4 +16,9 @@
   @include m.media-max767 {
     width: 48%;
   }
+
+  &_empty {
+    @extend .recipeCards__item;
+    min-height: 5px;
+  }
 }

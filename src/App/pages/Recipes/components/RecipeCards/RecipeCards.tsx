@@ -19,6 +19,7 @@ const RecipeCards: React.FC<RecipeCardsProps> = ({ items }) => {
           <RecipeCard item={item} onClick={() => navigate(`recipe/${item.id}`)} />
         </div>
       ))}
+      <div className={styles.recipeCards__item_empty}></div>
     </div>
   );
 };

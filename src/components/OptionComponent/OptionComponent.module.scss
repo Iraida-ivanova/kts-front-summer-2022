@@ -13,7 +13,7 @@
   padding: v.$drop-padding;
   @include m.text-area();
   @include m.gradient(.4);
-  color: black;
+  color: v.$black-color;
 
   &:hover {
     @include m.gradient(.6);
