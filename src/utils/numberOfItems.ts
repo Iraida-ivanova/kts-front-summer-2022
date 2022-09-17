@@ -1,1 +1,1 @@
-export const numberOfItems = 9;
+export const numberOfItems = 6;

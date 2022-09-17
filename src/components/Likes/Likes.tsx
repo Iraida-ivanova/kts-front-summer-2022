@@ -16,7 +16,9 @@ const Likes: React.FC<LikesProps> = ({ likes, className }) => {
   return (
     <div className={likesClassname}>
       <LikeIcon />
-      <div>{likes} Likes</div>
+      <div>
+        {likes} Like{likes > 1 && 's'}
+      </div>
     </div>
   );
 };

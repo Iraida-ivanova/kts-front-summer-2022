@@ -37,8 +37,6 @@ export default class MultiDropdownStore implements ILocalStore {
   }
 
   setSelectedValues(values: Option[]) {
-    // eslint-disable-next-line no-console
-    console.log('setSelectedValues', this._selectedValues);
     this._selectedValues = values;
   }
 

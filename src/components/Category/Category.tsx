@@ -15,7 +15,7 @@ const Category: React.FC<CategoryProps> = ({ option, onClick }) => {
     <div className={styles.category}>
       <div>{option.value}</div>
       <Button onClick={() => onClick(option)} className={styles.category__removeBtn}>
-        x
+        ✕
       </Button>
     </div>
   );

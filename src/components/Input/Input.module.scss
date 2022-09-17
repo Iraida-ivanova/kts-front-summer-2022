@@ -8,6 +8,7 @@
   padding: 8px 20px;
   outline-style: none;
   box-shadow: v.$box-shadow;
+  font-family: Montserrat, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 
   &_disabled {
     @include m.disabled();

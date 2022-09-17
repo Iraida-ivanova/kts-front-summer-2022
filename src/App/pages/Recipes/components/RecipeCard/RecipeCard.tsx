@@ -20,7 +20,11 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ item, onClick }) => {
       <img className={styles.card__image} src={item.image} alt={`${item.title}`} />
       <h2 className={styles.card__title}>{item.title}</h2>
       <div className={styles.card__category}>{item.dishTypes.join(', ')}</div>
-      <div className={styles.card__subtitle}>{item.ingredients && getStringOfIngredients(item.ingredients)}</div>
+      <div className={styles.card__subtitle}>
+        {item.ingredients && (
+          <div className={styles.card__ingredients}> {getStringOfIngredients(item.ingredients)}</div>
+        )}
+      </div>
       <div className={styles.card__content}>
         <div className={styles.card__calories}>{item.calories}</div>
         <Button color={ButtonColor.primary} className={styles.card__button_rectangle}>

@@ -5,6 +5,7 @@
   display: flex;
   width: fit-content;
   border-radius: v.$base-border-radius;
+  border: v.$light-grey-color 1px solid;
   padding: v.$drop-padding;
   @include m.text-area();
   font-size: 1.4rem;
@@ -21,5 +22,6 @@
   color: v.$black-color;
   font-family: Montserrat, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background-color: #F5F5F500;
+  font-size: 1.3rem;
   padding: 4px 4px 6px 4px;
 }
