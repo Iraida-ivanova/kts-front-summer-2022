@@ -2,12 +2,15 @@
   "name": "food-recipe-app",
   "version": "0.1.0",
   "author": "Iraida22 <iraida.iva22@mail.ru>",
+  "homepage": "https://iraida-ivanova.github.io/kts-front-summer-2022/",
   "scripts": {
     "build": "cross-env NODE_ENV=production npx webpack --mode=production",
     "dev": "cross-env NODE_ENV=development npx webpack serve --mode=development",
     "ts-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
     "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx,css,scss}\"",
-    "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx,css,scss}\" --fix"
+    "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx,css,scss}\" --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
@@ -30,6 +33,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.0.1",
