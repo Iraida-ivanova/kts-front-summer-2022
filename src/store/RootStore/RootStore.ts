@@ -1,6 +1,6 @@
-import ApiStore from '@store/RootStore/ApiStore';
-import { apiKey } from '@store/RootStore/ApiStore/apiKey';
-import QueryParamsStore from '@store/RootStore/QueryParamsStore/QueryParamsStore';
+import ApiStore from 'store/RootStore/ApiStore';
+import { apiKey } from 'store/RootStore/ApiStore/apiKey';
+import QueryParamsStore from 'store/RootStore/QueryParamsStore/QueryParamsStore';
 
 const baseUrl = 'https://api.spoonacular.com';
 export default class RootStore {

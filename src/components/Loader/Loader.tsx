@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoaderSize } from '@projectTypes/enums';
+import { LoaderSize } from 'projectTypes/enums';
 
 import styles from './Loader.module.scss';
 
@@ -10,15 +10,24 @@ type LoaderProps = {
   loading?: boolean;
   size?: LoaderSize;
   className?: string;
+  onScreen?: boolean;
 };
 
-const Loader: React.FC<LoaderProps> = ({ loading = true, size = LoaderSize.m, className }) => {
+const Loader: React.FC<LoaderProps> = ({ loading = true, size = LoaderSize.m, className, onScreen }) => {
   const loaderClass = classNames(`${styles.loader}`, {
-    [`${className}`]: className,
-    [`${styles[`loader_size-${size}`]}`]: size,
+    [styles[`loader_size-${size}`]]: size,
   });
 
-  return loading ? <div className={loaderClass}></div> : null;
+  const loaderWrapperClass = classNames(`${styles.mask}`, {
+    [styles[`${className}`]]: className,
+    [styles.loader_onScreen]: onScreen,
+  });
+
+  return loading ? (
+    <div className={loaderWrapperClass}>
+      <div className={loaderClass}></div>
+    </div>
+  ) : null;
 };
 
 export default Loader;

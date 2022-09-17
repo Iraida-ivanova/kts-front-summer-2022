@@ -6,6 +6,7 @@
   color: v.$white-color;
   @include m.aline-center();
   cursor: pointer;
+  transition: opacity 0.3s;
 
   &:hover {
     opacity: .8;

@@ -1,12 +1,12 @@
-import { Meta } from '@projectTypes/enums';
+import { action, computed, makeObservable, observable, runInAction } from 'mobx';
+import { Meta } from 'projectTypes/enums';
 import {
   DetailRecipeItemModel,
   IDetailRecipeItemApi,
   normalizeDetailRecipeItem,
-} from '@store/models/Food/detailRecipeItem';
-import rootStore from '@store/RootStore';
-import { ILocalStore } from '@utils/useLocalStore';
-import { action, computed, makeObservable, observable, runInAction } from 'mobx';
+} from 'store/models/Food/detailRecipeItem';
+import rootStore from 'store/RootStore';
+import { ILocalStore } from 'utils/useLocalStore';
 
 import { IDetailRecipeStore } from './types';
 

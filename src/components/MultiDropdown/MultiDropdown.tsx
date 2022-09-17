@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 
-import OptionComponent from '@components/OptionComponent';
-import { useRecipesContext } from '@pages/Recipes/Recipes';
-import { Option } from '@projectTypes/types';
 import classNames from 'classnames';
+import OptionComponent from 'components/OptionComponent';
 import { observer } from 'mobx-react-lite';
+import { useRecipesContext } from 'pages/Recipes/Recipes';
+import { Option } from 'projectTypes/types';
 
 import styles from './MultiDropdown.module.scss';
 
@@ -26,8 +26,19 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ options, disabled, plural
     [styles.multiDropdown__select_many]: value.length > 4,
   });
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     if (!disabled) multiDropdownStore.changeIsOpened();
+    if (multiDropdownStore.isOpened) {
+      document.addEventListener('click', handleClickOnPage);
+    }
+  };
+
+  const handleClickOnPage = (event: Event): void => {
+    const target = event.target as HTMLElement;
+    if (!target?.closest('#multiDropdown')) {
+      multiDropdownStore.close();
+      document.removeEventListener('click', handleClickOnPage);
+    }
   };
 
   const onSelectValue = useCallback(
@@ -49,7 +60,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ options, disabled, plural
   );
 
   return (
-    <div className={multiDropdownClassName}>
+    <div className={multiDropdownClassName} id={'multiDropdown'}>
       <div className={selectClassName} onClick={handleClick}>
         {pluralizeOptions(value)}
       </div>

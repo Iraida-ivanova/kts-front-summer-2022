@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 
-import Button from '@components/Button';
-import Likes from '@components/Likes';
-import ReturnIcon from '@components/ReturnIcon';
-import WithLoader from '@components/WithLoader';
-import { LoaderSize } from '@projectTypes/enums';
-import DetailRecipeStore from '@store/DetailRecipeStore';
-import { IIngredientApi } from '@store/models/Food/ingridient';
-import { useLocalStore } from '@utils/useLocalStore';
+import Button from 'components/Button';
+import Likes from 'components/Likes';
+import ReturnIcon from 'components/ReturnIcon';
+import WithLoader from 'components/WithLoader';
 import { observer } from 'mobx-react-lite';
+import { LoaderSize } from 'projectTypes/enums';
 import { Link, useParams } from 'react-router-dom';
+import DetailRecipeStore from 'store/DetailRecipeStore';
+import { IIngredientApi } from 'store/models/Food/ingridient';
+import { useLocalStore } from 'utils/useLocalStore';
 
 import styles from './DetailRecipe.module.scss';
 
@@ -30,7 +30,7 @@ const DetailRecipe: React.FC = () => {
           <ReturnIcon />
         </Button>
       </Link>
-      <WithLoader loading={loading} size={LoaderSize.l}>
+      <WithLoader loading={loading} size={LoaderSize.l} onScreen={true}>
         {hasSuccess && item && (
           <>
             <img className={styles.detailRecipe__image} src={item.image} alt={`${item.title}`} />

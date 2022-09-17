@@ -23,9 +23,11 @@
   padding: v.$drop-padding;
   @include m.text-area(60px);
   @include m.gradient();
-  border-radius: v.$base-border-radius;
   margin-bottom: 4px;
   width: 176px;
+  border-radius: v.$base-border-radius;
+  box-shadow: v.$box-shadow;
+  @include m.transition-shadow(v.$on-hover-light-shadow, v.$base-border-radius);
 }
 
 .multiDropdown__select_little {
@@ -50,5 +52,6 @@
 .multiDropdown__options {
   background-color: v.$white-color;
   border-radius: v.$base-border-radius;
+  @include m.transition-shadow(v.$on-hover-light-shadow, v.$base-border-radius);
 }
 

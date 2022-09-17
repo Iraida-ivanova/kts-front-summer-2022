@@ -1,5 +1,5 @@
-import { HTTPMethod } from '@projectTypes/enums';
 import axios from 'axios';
+import { HTTPMethod } from 'projectTypes/enums';
 
 import { ApiResponse, GetDataParams, IApiStore, RequestParams, StatusHTTP } from './types';
 
@@ -12,7 +12,7 @@ export default class ApiStore implements IApiStore {
     this.baseUrl = baseUrl;
   }
 
-  async request<SuccessT, ErrorT = any, ReqT = {}>(
+  async request<SuccessT, ErrorT = Error, ReqT = Record<string, unknown>>(
     requestParams: RequestParams<ReqT>
   ): Promise<ApiResponse<SuccessT, ErrorT>> {
     let config = {};
@@ -38,7 +38,7 @@ export default class ApiStore implements IApiStore {
     }
 
     try {
-      let response = await axios(config);
+      const response = await axios(config);
 
       if (response.status === 200) {
         return {
@@ -62,7 +62,7 @@ export default class ApiStore implements IApiStore {
     }
   }
 
-  async getData<SuccessT, ErrorT = any>(params: GetDataParams): Promise<ApiResponse<SuccessT, ErrorT>> {
+  async getData<SuccessT, ErrorT = Error>(params: GetDataParams): Promise<ApiResponse<SuccessT, ErrorT>> {
     return await this.request<SuccessT, ErrorT>({
       method: HTTPMethod.GET,
       headers: {},

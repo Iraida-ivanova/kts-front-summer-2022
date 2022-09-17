@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Button from '@components/Button';
-import Likes from '@components/Likes';
-import { ButtonColor } from '@projectTypes/enums';
-import { RecipeItemModel } from '@store/models/Food/recipeItem';
-import { getStringOfIngredients } from '@utils/utils';
+import Button from 'components/Button';
+import Likes from 'components/Likes';
+import { ButtonColor } from 'projectTypes/enums';
+import { RecipeItemModel } from 'store/models/Food/recipeItem';
+import { getStringOfIngredients } from 'utils/utils';
 
 import styles from './RecipeCard.module.scss';
 
@@ -24,7 +24,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ item, onClick }) => {
       <div className={styles.card__content}>
         <div className={styles.card__calories}>{item.calories}</div>
         <Button color={ButtonColor.primary} className={styles.card__button_rectangle}>
-          Order
+          Detail
         </Button>
         <Button color={ButtonColor.primary} className={styles.card__button_round}>
           +

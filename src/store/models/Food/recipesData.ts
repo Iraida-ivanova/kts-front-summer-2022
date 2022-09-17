@@ -1,4 +1,4 @@
-import { IRecipeItemApi, normalizeRecipeItem, RecipeItemModel } from '@store/models/Food/recipeItem';
+import { IRecipeItemApi, normalizeRecipeItem, RecipeItemModel } from 'store/models/Food/recipeItem';
 
 export type RecipesDataApi = {
   results: IRecipeItemApi[];

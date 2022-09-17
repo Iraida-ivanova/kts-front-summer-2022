@@ -17,7 +17,7 @@
 .recipes__header {
   width: 100%;
   padding: 0 8px;
-  margin: 0 0 2.5rem;
+  margin: 0 0 v.$margin-large;
   display: flex;
   gap: v.$margin;
 
@@ -33,10 +33,17 @@
 .recipes__search {
   flex-grow: 1;
   position: relative;
+  @include m.transition-shadow(v.$on-hover-light-shadow, v.$base-border-radius);
 
   input {
     width: 100%;
   }
+}
+
+.recipes__message {
+  margin: v.$margin-large 0;
+  padding-left: 8px;
+  font-size: 2rem;
 }
 
 .recipes__searchBtn {
